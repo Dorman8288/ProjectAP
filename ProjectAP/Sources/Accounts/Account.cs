@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace ProjectAP.Sources
 {
-    class Account
+    public class Account
     {
         string _name;
         string _familyName;
@@ -58,7 +58,7 @@ namespace ProjectAP.Sources
             }
         }
 
-        public bool CardIsValid(string cardNumber, string CVV2, int year, int month) => CardDateIsValid(year, month) && CardCVV2IsValid(CVV2) && CardNumberValidation(cardNumber);
+        public bool CardIsValid(string cardNumber, string CVV2, int year, int month) => CardDateIsValid(year, month) && CardCVV2IsValid(CVV2) && CardNumberIsValid(cardNumber);
         //utility
         bool CardDateIsValid(int year, int month)
         {
@@ -66,7 +66,7 @@ namespace ProjectAP.Sources
             else return DateTime.Now.Year <= year;
         }
         bool CardCVV2IsValid(string CVV2) => Regex.IsMatch(CVV2, @"$\d{3,4}^");
-        bool CardNumberValidation(string cardNumber)
+        bool CardNumberIsValid(string cardNumber)
         {
             if (!Regex.IsMatch(cardNumber, @"$\d{16}^")) return false;
             //luhn algorithm
