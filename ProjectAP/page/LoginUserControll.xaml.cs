@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace ProjectAP.page
 {
     /// <summary>
-    /// Interaction logic for Signup.xaml
+    /// Interaction logic for LoginUserControll.xaml
     /// </summary>
-    public partial class Signup : Page
+    public partial class LoginUserControll : UserControl
     {
-        public Signup()
+        public LoginUserControll()
         {
             InitializeComponent();
         }
