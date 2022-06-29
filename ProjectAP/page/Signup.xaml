@@ -4,14 +4,119 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectAP.page"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="350"
       Title="Signup"
       Background="{DynamicResource PrimaryColor}">
 
-    <Border Padding="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="../Images/ShopLogo.png" Margin="0,0,0,303" Grid.RowSpan="2" />
+        <Border Grid.Row="1" Margin="35">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--مشخصات کاربر-->
+                    <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Phone" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="PhoneNumber"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+                    <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="User" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="FirstName"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+                    <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="AccountBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="LastName"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+                    <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Email" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="0" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Email"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+                    <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="Password" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <PasswordBox
+                          Grid.Row="4" Grid.Column="1"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"
+                          x:Name="FloatingPasswordBox"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Password"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--دکمه های لاگین و ریست-->
+                    <Button Margin="0 0 10 0" Grid.Row="1"
+                      Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                      Background="{DynamicResource SeconderyColor}"
+                      BorderBrush="{DynamicResource SeconderyColor}"
+                      materialDesign:ButtonAssist.CornerRadius="10"
+                      Content="Register"/>
+                    <Button Margin="10 0 0 0" Grid.Row="1" Grid.Column="1"
+                      Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
+                      Background="{DynamicResource SeconderyColor}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                      BorderBrush="{DynamicResource SeconderyColor}"
+                      Content="Reset"/>
+                    <Button Margin="0 2 0 2" Grid.Row="0" Grid.ColumnSpan="2"
+                      Style="{StaticResource MaterialDesignFlatButton}"
+                      ToolTip="Register"
+                      Content="Already have an account?!"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+    <!--<Border Padding="20">
         <StackPanel>
-            <!--مشخصات کاربر-->
+            --><!--مشخصات کاربر--><!--
             <Grid>
                 <TextBlock Text="input your information" FontWeight="Bold" Foreground="#32704b" />
                 <TextBlock Text="Phone" Padding="3" Foreground="#183624" Margin="0,32,0,-32" />
@@ -29,7 +134,7 @@
                 <TextBlock Text="Password" Padding="3" Foreground="#183624" Margin="0,237,0,-237" />
                 <TextBox Padding="2" Margin="0,259,0,-259"  ></TextBox>
             </Grid>
-            <!--دکمه های لاگین و ریست-->
+            --><!--دکمه های لاگین و ریست--><!--
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="11*"/>
@@ -48,5 +153,5 @@
 
         </StackPanel>
 
-    </Border>
+    </Border>-->
 </Page>
