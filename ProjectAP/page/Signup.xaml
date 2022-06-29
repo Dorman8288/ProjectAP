@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:ProjectAP.page"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="350"
-      Title="Signup">
+      Title="Signup"
+      Background="{DynamicResource PrimaryColor}">
 
     <Border Padding="20">
         <StackPanel>
