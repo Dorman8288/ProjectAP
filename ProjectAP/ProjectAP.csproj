@@ -7,9 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\ShopLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Dialogs\" />
     <Folder Include="Pages\" />
     <Folder Include="NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\ShopLogo.png" />
   </ItemGroup>
 
 </Project>
