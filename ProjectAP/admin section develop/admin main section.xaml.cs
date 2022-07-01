@@ -26,5 +26,10 @@ namespace ProjectAP.admin_section_develop
         {
 
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
