@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="../Images/ShopLogo.png" Margin="0,0,0,344" Grid.RowSpan="2" />
+        <Image Grid.Row="0" Source="../Images/ShopLogo.png" Margin="0,-32,0,376" Grid.RowSpan="2" />
         <Border Grid.Row="1" Margin="35">
 
             <Grid>
@@ -24,8 +24,9 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="11*"/>
+                        <ColumnDefinition Width="36*"/>
+                        <ColumnDefinition Width="233*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -35,8 +36,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--مشخصات کاربر-->
-                    <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Phone" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                    <TextBox Grid.Row="3" Grid.Column="1"
+                    <materialDesign:PackIcon Grid.Row="3" Grid.Column="1" Kind="Phone" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="3" Grid.Column="2"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="PhoneNumber"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -44,8 +45,8 @@
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
-                    <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="User" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1"
+                    <materialDesign:PackIcon Grid.Row="1" Grid.Column="1" Kind="User" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="1" Grid.Column="2"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="FirstName"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -53,8 +54,8 @@
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
-                    <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="AccountBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                    <TextBox Grid.Row="2" Grid.Column="1"
+                    <materialDesign:PackIcon Grid.Row="2" Grid.Column="1" Kind="AccountBoxOutline" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Row="2" Grid.Column="2"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="LastName"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -62,8 +63,8 @@
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
-                    <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Email" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                    <TextBox Grid.Row="0" Grid.Column="1"
+                    <materialDesign:PackIcon Grid.Column="1" Kind="Email" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <TextBox Grid.Column="2"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Email"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -71,9 +72,9 @@
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
-                    <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="Password" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                    <materialDesign:PackIcon Grid.Row="4" Grid.Column="1" Kind="Password" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
                     <PasswordBox
-                          Grid.Row="4" Grid.Column="1"
+                          Grid.Row="4" Grid.Column="2"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"
                           x:Name="FloatingPasswordBox"

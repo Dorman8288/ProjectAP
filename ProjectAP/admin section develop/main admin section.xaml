@@ -1,0 +1,212 @@
+﻿<Page x:Class="ProjectAP.admin_section_develop.main_admin_section"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ProjectAP.admin_section_develop"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="main_admin_section">
+
+    <materialDesign:Card>
+        <TabControl
+    VerticalContentAlignment="Top"
+    materialDesign:ColorZoneAssist.Mode="Inverted"
+    Style="{StaticResource MaterialDesignNavigationRailTabControl}" TabStripPlacement="Right">
+            <TabItem  >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="InformationVariant" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Info" />
+                    </StackPanel>
+                </TabItem.Header>
+                
+                <TextBlock>
+        <Run>
+            
+        </Run>
+        <LineBreak />
+        <LineBreak />
+        <Run>
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+        </Run>
+                </TextBlock>
+            </TabItem>
+
+
+
+
+
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="BookOpenBlankVariant" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Books" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 1 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+      </Run>
+                </TextBlock>
+            </TabItem>
+
+
+
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="Wallet" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="wallet" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 1 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+      </Run>
+                </TextBlock>
+            </TabItem>
+
+
+
+
+
+
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="PackageVariantClosedPlus" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Add" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 1 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+      </Run>
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="BookEdit" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Edit" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 2 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Praesent sed dui arcu. Vivamus porta auctor sagittis
+      </Run>
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="ProgressStar" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="VIP" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 3 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="PercentCircleOutline" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Discount" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 4 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+                </TextBlock>
+            </TabItem>
+        </TabControl>
+    </materialDesign:Card>
+</Page>
