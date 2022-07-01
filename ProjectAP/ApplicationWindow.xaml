@@ -39,18 +39,18 @@
                 <Image Source="Images/ShopLogo.png" HorizontalAlignment="Center" Width="50" Height="50"/>
                 <Button 
                         Margin="4"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Click="Store_Button_Click">
-                    <DockPanel>
+                    <DockPanel HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Store" Foreground="{DynamicResource ForeGroundColor}"/>
-                        <TextBlock Text="Store" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Store" DockPanel.Dock="Right" Foreground="{DynamicResource ForeGroundColor}"/>
                     </DockPanel>
 
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
                     Click="Cart_Button_Click">
                     <DockPanel>
@@ -60,7 +60,7 @@
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Click="Inventory_Button_Click">
                     <DockPanel>
@@ -70,7 +70,7 @@
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Click="Settings_Button_Click">
                     <DockPanel>
@@ -80,7 +80,7 @@
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Left"
+                        HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
                         Click="SignOut_Button_Click">
                     <DockPanel>

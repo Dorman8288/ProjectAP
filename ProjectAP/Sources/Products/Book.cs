@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectAP.Sources.Products
+namespace ProjectAP.Sources
 {
     class Book : Product
     {
         string _author;
-        string imagePath;
-        string author
+        public string imagePath { get; }
+        public string author
         {
             get { return _author; }
-            set { if (value == "") throw new Exception("Product name cannot be empty"); else _author = value; }
+            private set { if (value == "") throw new Exception("Product name cannot be empty"); else _author = value; }
         }
         public Book(string name, int ID, double price, string description, string filePath, int rating, string author, string imagePath) : base(name, ID, price, description, filePath, rating)
         {
