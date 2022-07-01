@@ -1,0 +1,120 @@
+﻿<Window x:Class="ProjectAP.ApplicationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectAP"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="ApplicationWindow" Height="450" Width="800">
+    <materialDesign:DrawerHost x:Name="DrawerHost">
+        <materialDesign:DrawerHost.Style>
+            <Style
+              TargetType="materialDesign:DrawerHost"
+              BasedOn="{StaticResource {x:Type materialDesign:DrawerHost}}">
+                <Style.Triggers>
+                    <DataTrigger
+                              Binding="{Binding IsChecked, ElementName=BackgroundToggle}"
+                              Value="True">
+                        <Setter
+                                Property="OverlayBackground"
+                                Value="{DynamicResource PrimaryHueMidBrush}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </materialDesign:DrawerHost.Style>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.RowSpan="2"
+                        Margin="0"
+                        Background="{DynamicResource PrimaryColor}">
+                <Image Source="Images/ShopLogo.png" HorizontalAlignment="Center" Width="50" Height="50"/>
+                <Button 
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        >
+                    <DockPanel>
+                        <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Store" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Store" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                    </DockPanel>
+
+                </Button>
+                <Button
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <DockPanel>
+                        <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Cart" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Cart" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                    </DockPanel>
+                </Button>
+                <Button
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <DockPanel>
+                        <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Archive" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Inventory" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                    </DockPanel>
+                </Button>
+                <Button
+                        Margin="4"
+                        HorizontalAlignment="Center"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                    <DockPanel>
+                        <materialDesign:PackIcon DockPanel.Dock="Left" Kind="SignOut" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Sign Out" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                    </DockPanel>
+                </Button>
+            </StackPanel>
+            <materialDesign:ColorZone Grid.Column="1" Grid.Row="0" 
+                                      Mode="Custom"
+                                      materialDesign:ColorZoneAssist.Background="{DynamicResource SeconderyColor}"
+                                      materialDesign:ColorZoneAssist.Foreground="{DynamicResource ForeGroundColor}"
+                                      Padding="16">
+                <DockPanel>
+                    <StackPanel
+                                  Orientation="Horizontal"
+                                  materialDesign:RippleAssist.IsCentered="True">
+                        <materialDesign:ColorZone
+                                            Mode="Standard"
+                                            Padding="8 4 8 4"
+                                            CornerRadius="2"
+                                            Panel.ZIndex="1"
+                                            Margin="16 0 0 0"
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="Auto" />
+                                    <ColumnDefinition  Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Button
+                                         Style="{StaticResource MaterialDesignToolButton}">
+                                    <materialDesign:PackIcon Kind="Search" Opacity=".56" />
+
+                                </Button>
+                                <TextBox
+                                        Grid.Column="1"
+                                        Margin="8 0 0 0"
+                                        materialDesign:HintAssist.Hint="Search"
+                                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                        BorderThickness="0"
+                                        MinWidth="200"
+                                        VerticalAlignment="Center" />
+                            </Grid>
+                        </materialDesign:ColorZone>
+                    </StackPanel>
+                </DockPanel>
+            </materialDesign:ColorZone>
+        </Grid>
+    </materialDesign:DrawerHost>
+</Window>
