@@ -8,19 +8,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ProjectAP.admin_section_develop
 {
     /// <summary>
-    /// Interaction logic for main_admin_section.xaml
+    /// Interaction logic for admin_main_section.xaml
     /// </summary>
-    public partial class main_admin_section : Page
+    public partial class admin_main_section : Window
     {
-        public main_admin_section()
+        public admin_main_section()
         {
             InitializeComponent();
+        }
+
+        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,310 @@
+﻿<Window x:Class="ProjectAP.admin_section_develop.admin_main_section"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectAP.admin_section_develop"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="admin_main_section" Height="450" Width="800">
+    <materialDesign:Card>
+        <TabControl
+    VerticalContentAlignment="Top"
+    materialDesign:ColorZoneAssist.Mode="Inverted"
+    Style="{StaticResource MaterialDesignNavigationRailTabControl}" TabStripPlacement="Right">
+            <TabItem  >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="InformationVariant" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Info" />
+                    </StackPanel>
+                </TabItem.Header>
+
+
+            </TabItem>
+
+
+
+
+
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="BookOpenBlankVariant" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Books" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 1 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+      </Run>
+                </TextBlock>
+            </TabItem>
+
+
+
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="Wallet" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="wallet" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 1 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...
+      </Run>
+                </TextBlock>
+            </TabItem>
+
+
+
+
+
+
+            <TabItem >
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            
+            Kind="PackageVariantClosedPlus" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Add" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="#dbdbdb">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="VIP" Margin="419,0,-156,20" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="20"/>
+                    <ToggleButton
+  Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
+  ToolTip="MaterialDesignSwitchAccentToggleButton"
+  IsChecked="True" Grid.ColumnSpan="2" Margin="186,-24,46,0" />
+
+                    <Button
+        Margin="410,252,19,26"
+        Content="{materialDesign:PackIcon Kind=Plus}"
+        Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Grid.Row="1" Background="LightGray" Foreground="Black" />
+
+
+
+                    <Image Source="C:\Users\admin\OneDrive\Desktop\photoes\4406340.jpg" Grid.ColumnSpan="2" Margin="478,-1,-5,0" Grid.RowSpan="2"/>
+                    <Image Grid.Row="0" Source="../Images/ShopLogo.png" HorizontalAlignment="Left"/>
+                    <Border Margin="0,100,0,0" HorizontalAlignment="Left" Grid.RowSpan="2" Width="325">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,106" Grid.RowSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="7*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <!--مشخصات کاربر-->
+                                <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                                <TextBox Grid.Row="0" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Name"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                                <TextBox Grid.Row="1" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Writer"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+
+
+
+
+                                <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                                <TextBox Grid.Row="2" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Publisher"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+
+                                <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                                <TextBox Grid.Row="3" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Cost"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+
+                                <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                                <TextBox Grid.Row="4" Grid.Column="1"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Detail"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}" TextChanged="TextBox_TextChanged"/>
+
+
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <!--دکمه های لاگین و ریست-->
+                                <Button Margin="14,82,193,0" VerticalAlignment="Top"
+  Style="{StaticResource MaterialDesignRaisedButton}"
+  materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
+  Content="browse file" />
+
+
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="BookEdit" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Edit" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 2 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+        <Run
+          FontStyle="Italic">
+        Praesent sed dui arcu. Vivamus porta auctor sagittis
+      </Run>
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="ProgressStar" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="VIP" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 3 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+                </TextBlock>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel
+          Width="auto"
+          Height="auto">
+                        <materialDesign:PackIcon
+            Width="24"
+            Height="24"
+            HorizontalAlignment="Center"
+            Kind="PercentCircleOutline" />
+                        <TextBlock
+            HorizontalAlignment="Center"
+            Text="Discount" />
+                    </StackPanel>
+                </TabItem.Header>
+                <TextBlock>
+        <Run
+          Text="tab 4 content. Default look and behaviors." />
+        <LineBreak />
+        <LineBreak />
+                </TextBlock>
+            </TabItem>
+        </TabControl>
+    </materialDesign:Card>
+</Window>
