@@ -8,28 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectAP.admin_section_develop
+namespace ProjectAP.Customer_Pages
 {
     /// <summary>
-    /// Interaction logic for admin_main_section.xaml
+    /// Interaction logic for SettingsPage.xaml
     /// </summary>
-    public partial class admin_main_section : Window
+    public partial class SettingsPage : UserControl
     {
-        public admin_main_section()
+        public SettingsPage()
         {
             InitializeComponent();
         }
-
-        private void ToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void TextBox_TextChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-        
     }
 }

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Linq;
 using System.Windows.Shapes;
 
 namespace ProjectAP.page
@@ -21,6 +22,20 @@ namespace ProjectAP.page
         public LoginUserControll()
         {
             InitializeComponent();
+        }
+
+        private void Login_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ApplicationWindow window = new ApplicationWindow();
+            window.Show();
+            Application.Current.Windows.OfType<AuthorizationWindow>().First(x => x.Title == "AuthorizationWindow").Close();
+        }
+
+        private void Reset_Button_Click(object sender, RoutedEventArgs e)
+        {
+            admin_section_develop.admin_main_section window = new admin_section_develop.admin_main_section();
+            window.Show();
+            Application.Current.Windows.OfType<AuthorizationWindow>().First(x => x.Title == "AuthorizationWindow").Close();
         }
     }
 }

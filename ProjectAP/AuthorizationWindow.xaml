@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="AuthorizationWindow" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Height="500" Width="350"
-        Background="{DynamicResource PrimaryColor}">
+        Background="{DynamicResource PrimaryColor}"
+        Name="Authorization_Window"
+        WindowStartupLocation="CenterScreen">
     <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
         <materialDesign:Transitioner.InputBindings>
             <KeyBinding
