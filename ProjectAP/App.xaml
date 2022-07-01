@@ -2,10 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProjectAP"
-             StartupUri="MainWindow.xaml">
+             StartupUri="ApplicationWindow.xaml">
    <Application.Resources>
         <ResourceDictionary>
-            <SolidColorBrush x:Key="PrimaryColor" Color="#fdd835"/>
+            <SolidColorBrush x:Name="PrimaryColorBrush" x:Key="PrimaryColor" Color="#fdd835"/>
             <SolidColorBrush x:Key="SeconderyColor" Color="#fb8c00"/>
             <SolidColorBrush x:Key="ForeGroundColor" Color="black"/>
             <ResourceDictionary.MergedDictionaries>
