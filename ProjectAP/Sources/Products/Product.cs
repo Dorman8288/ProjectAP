@@ -13,7 +13,19 @@ namespace ProjectAP.Sources
         double _price;
         string _description;
         string filePath;
-
+        double _discount;
+        public double discount
+        {
+            get { return _discount; }
+            private set
+            {
+                if (!(0 < value && value <= 1)) throw new Exception("discount amount is invalid");
+                else
+                {
+                    _discount = value;
+                }
+            }
+        }
         public string name
         {
             get { return _name; }
@@ -34,6 +46,10 @@ namespace ProjectAP.Sources
             get { return _description; }
             private set { if (value == "") throw new Exception("Product name cannot be empty"); else _description = value; }
         }
+        public void AddDiscount(int value)
+        {
+            discount = (double)value / 100;
+        }
         public Product(string name, int ID, double price, string description, string filePath, int rating)
         {
             this.name = name;
@@ -42,6 +58,10 @@ namespace ProjectAP.Sources
             this.description = description;
             this.filePath = filePath;
             this.rating = rating;
+        }
+        public double CalculatePrice()
+        {
+            return price * (1 - discount);
         }
     }
 }

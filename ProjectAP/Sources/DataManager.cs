@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace ProjectAP.Sources
 {
@@ -14,6 +15,7 @@ namespace ProjectAP.Sources
         }
         public static void AddAccount(Account input)
         {
+            if (allAccounts.Any(x => input.email == x.email)) throw new Exception("this email is registered");
             allAccounts.Add(input);
         }
     }

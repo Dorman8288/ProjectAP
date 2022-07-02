@@ -57,7 +57,14 @@ namespace ProjectAP.Sources
                 _password = value;
             }
         }
-
+        public Account(string name, string familyName, string email, string phoneNumber, string password)
+        {
+            this.name = name;
+            this.familyName = familyName;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+            this.password = password;
+        }
         public bool CardIsValid(string cardNumber, string CVV2, int year, int month) => CardDateIsValid(year, month) && CardCVV2IsValid(CVV2) && CardNumberIsValid(cardNumber);
         //utility
         bool CardDateIsValid(int year, int month)

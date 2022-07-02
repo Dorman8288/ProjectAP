@@ -10,7 +10,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ProjectAP.Sources;
-using ProjectAP.Sources.Accounts;
 
 namespace ProjectAP
 {
@@ -22,6 +21,8 @@ namespace ProjectAP
         public AuthorizationWindow()
         {
             InitializeComponent();
+            Account testAccount;
+            //DataManager.AddAccount();
         }
     }
 }
