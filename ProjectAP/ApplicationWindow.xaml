@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjectAP"
+        xmlns:local="clr-namespace:ProjectAP.Customer_Pages"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ApplicationWindow" Height="450" Width="800">
+        Title="ApplicationWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
     <materialDesign:DrawerHost x:Name="DrawerHost">
         <materialDesign:DrawerHost.Style>
             <Style
@@ -30,7 +31,7 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5.5*"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.RowSpan="2"
                         Margin="0"
@@ -38,19 +39,20 @@
                 <Image Source="Images/ShopLogo.png" HorizontalAlignment="Center" Width="50" Height="50"/>
                 <Button 
                         Margin="4"
-                        HorizontalAlignment="Center"
+                        HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
-                        >
-                    <DockPanel>
+                        Click="Store_Button_Click">
+                    <DockPanel HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Store" Foreground="{DynamicResource ForeGroundColor}"/>
-                        <TextBlock Text="Store" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Store" DockPanel.Dock="Right" Foreground="{DynamicResource ForeGroundColor}"/>
                     </DockPanel>
 
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                    Click="Cart_Button_Click">
                     <DockPanel>
                         <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Cart" Foreground="{DynamicResource ForeGroundColor}"/>
                         <TextBlock Text="Cart" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
@@ -58,8 +60,9 @@
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="Inventory_Button_Click">
                     <DockPanel>
                         <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Archive" Foreground="{DynamicResource ForeGroundColor}"/>
                         <TextBlock Text="Inventory" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
@@ -67,8 +70,19 @@
                 </Button>
                 <Button
                         Margin="4"
-                        HorizontalAlignment="Center"
-                        Style="{StaticResource MaterialDesignFlatButton}">
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="Settings_Button_Click">
+                    <DockPanel>
+                        <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Settings" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="Settings" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                    </DockPanel>
+                </Button>
+                <Button
+                        Margin="4"
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="SignOut_Button_Click">
                     <DockPanel>
                         <materialDesign:PackIcon DockPanel.Dock="Left" Kind="SignOut" Foreground="{DynamicResource ForeGroundColor}"/>
                         <TextBlock Text="Sign Out" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
@@ -115,6 +129,12 @@
                     </StackPanel>
                 </DockPanel>
             </materialDesign:ColorZone>
+            <materialDesign:Transitioner Name="PageNavigator" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
+                <local:ProductsPage/>
+                <local:CartPage/>
+                <local:InventoryPage/>
+                <local:SettingsPage/>
+            </materialDesign:Transitioner>
         </Grid>
     </materialDesign:DrawerHost>
 </Window>

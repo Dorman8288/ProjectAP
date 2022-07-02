@@ -11,14 +11,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectAP.admin_section_develop
+namespace ProjectAP.Customer_Pages
 {
     /// <summary>
-    /// Interaction logic for main_admin_section.xaml
+    /// Interaction logic for CartPage.xaml
     /// </summary>
-    public partial class main_admin_section : Page
+    public partial class CartPage : UserControl
     {
-        public main_admin_section()
+        public CartPage()
         {
             InitializeComponent();
         }
