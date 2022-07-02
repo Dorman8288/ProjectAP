@@ -17,7 +17,7 @@ namespace ProjectAP.Sources
             get { return _name; }
             private set
             {
-                if (!Regex.IsMatch(value, @"$\w{3,32}^")) throw new Exception("name is not in the correct format");
+                if (!Regex.IsMatch(value, @"^\w{3,32}$")) throw new Exception("FirstName is not in the correct format");
                 _name = value;
             }
         }
@@ -26,7 +26,7 @@ namespace ProjectAP.Sources
             get { return _familyName; }
             private set
             {
-                if (!Regex.IsMatch(value, @"$[A-Za-z]{3,32}^")) throw new Exception("family name is not in the correct format");
+                if (!Regex.IsMatch(value, @"^[A-Za-z]{3,32}$")) throw new Exception("LastName is not in the correct format");
                 _familyName = value;
             }
         }
@@ -35,7 +35,7 @@ namespace ProjectAP.Sources
             get { return _email; }
             private set
             {
-                if (!Regex.IsMatch(value, @"$\w{1,32}@\w{1,32}\.\w{1,32}^")) throw new Exception("email is not in the correct format");
+                if (!Regex.IsMatch(value, @"^\w{1,32}@\w{1,32}\.\w{1,32}$")) throw new Exception("email is not in the correct format");
                 _email = value;
             }
         }
@@ -44,7 +44,7 @@ namespace ProjectAP.Sources
             get { return _phoneNumber; }
             private set
             {
-                if (!Regex.IsMatch(value, @"$09\d{9}^")) throw new Exception("phone number is not in the correct format");
+                if (!Regex.IsMatch(value, @"^09\d{9}$")) throw new Exception("phone number is not in the correct format");
                 _phoneNumber = value;
             }
         }
@@ -53,7 +53,7 @@ namespace ProjectAP.Sources
             get { return _password; }
             private set
             {
-                if (!Regex.IsMatch(value, @"$(?=.*[a-z])(?=.*[A-Z]).{8,40}^")) throw new Exception("phone number is not in the correct format");
+                if (!Regex.IsMatch(value, @"^(?=.*[a-z])(?=.*[A-Z]).{8,40}$")) throw new Exception("Password is not in the correct format");
                 _password = value;
             }
         }
@@ -72,10 +72,10 @@ namespace ProjectAP.Sources
             if (DateTime.Now.Year == year) return DateTime.Now.Month <= month;
             else return DateTime.Now.Year <= year;
         }
-        bool CardCVV2IsValid(string CVV2) => Regex.IsMatch(CVV2, @"$\d{3,4}^");
+        bool CardCVV2IsValid(string CVV2) => Regex.IsMatch(CVV2, @"^\d{3,4}$");
         bool CardNumberIsValid(string cardNumber)
         {
-            if (!Regex.IsMatch(cardNumber, @"$\d{16}^")) return false;
+            if (!Regex.IsMatch(cardNumber, @"^\d{16}$")) return false;
             //luhn algorithm
             int product = 0;
             for(int i = 0; i < cardNumber.Length; i++)

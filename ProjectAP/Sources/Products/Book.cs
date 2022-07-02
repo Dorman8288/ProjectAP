@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectAP.Sources
 {
-    class Book : Product
+    public class Book : Product
     {
         string _author;
         public string imagePath { get; }

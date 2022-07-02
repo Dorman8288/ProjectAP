@@ -22,7 +22,7 @@
                     <RowDefinition Height="3*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Grid.Column="0" Margin="0 0 0 0">
+                <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="11*"/>
                         <ColumnDefinition Width="36*"/>
@@ -38,6 +38,8 @@
                     <!--مشخصات کاربر-->
                     <materialDesign:PackIcon Grid.Row="3" Grid.Column="1" Kind="Phone" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
                     <TextBox Grid.Row="3" Grid.Column="2"
+                          Name="phoneNumberTextBox"
+                          MaxLength="11"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="PhoneNumber"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -47,6 +49,7 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
                     <materialDesign:PackIcon Grid.Row="1" Grid.Column="1" Kind="User" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
                     <TextBox Grid.Row="1" Grid.Column="2"
+                          Name="FirstNameTextBox"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="FirstName"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -56,6 +59,7 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
                     <materialDesign:PackIcon Grid.Row="2" Grid.Column="1" Kind="AccountBoxOutline" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
                     <TextBox Grid.Row="2" Grid.Column="2"
+                          Name="LastNameTextBox"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="LastName"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -65,6 +69,7 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
                     <materialDesign:PackIcon Grid.Column="1" Kind="Email" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
                     <TextBox Grid.Column="2"
+                          Name="EmailTextBox"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Email"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -75,14 +80,15 @@
                     <materialDesign:PackIcon Grid.Row="4" Grid.Column="1" Kind="Password" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
                     <PasswordBox
                           Grid.Row="4" Grid.Column="2"
+                          Name="PasswordTextbox"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"
-                          x:Name="FloatingPasswordBox"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Password"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
-                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                          materialDesign:HintAssist.HelperText="At least one small and capital letters"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -90,23 +96,26 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <!--دکمه های لاگین و ریست-->
-                    <Button Margin="0 0 10 0" Grid.Row="1"
+                    <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="red" Name="ErrorDisplayer"/>
+                    <Button Margin="0 0 10 0" Grid.Row="2"
                       Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
                       Background="{DynamicResource SeconderyColor}"
                       BorderBrush="{DynamicResource SeconderyColor}"
                       materialDesign:ButtonAssist.CornerRadius="10"
-                      Content="Register"/>
-                    <Button Margin="10 0 0 0" Grid.Row="1" Grid.Column="1"
+                      Content="Register"
+                      Click="Register_Button_Click"/>
+                    <Button Margin="10 0 0 0" Grid.Row="2" Grid.Column="1"
                       Style="{StaticResource MaterialDesignRaisedSecondaryButton}"
                       Background="{DynamicResource SeconderyColor}"
                         materialDesign:ButtonAssist.CornerRadius="10"
                       BorderBrush="{DynamicResource SeconderyColor}"
                       Content="Reset"/>
-                    <Button Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" Margin="0 2 0 2" Grid.Row="0" Grid.ColumnSpan="2"
+                    <Button Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" Margin="0 2 0 2" Grid.Row="1" Grid.ColumnSpan="2"
                       Style="{StaticResource MaterialDesignFlatButton}"
                       ToolTip="Register"
                       Content="Already have an account?!"/>

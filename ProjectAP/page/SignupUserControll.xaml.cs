@@ -10,7 +10,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using ProjectAP.Sources;
+using ProjectAP.Sources.Accounts;
 namespace ProjectAP.page
 {
     /// <summary>
@@ -21,6 +22,23 @@ namespace ProjectAP.page
         public SignupUserControll()
         {
             InitializeComponent();
+        }
+
+        private void Register_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ErrorDisplayer.Text = "";
+                Customer newCustomer = new Customer(FirstNameTextBox.Text, LastNameTextBox.Text, EmailTextBox.Text, phoneNumberTextBox.Text, PasswordTextbox.Password);
+                DataManager.AddAccount(newCustomer);
+                ErrorDisplayer.Foreground = Brushes.Green;
+                ErrorDisplayer.Text = "*Your account has been registered";
+            }
+            catch(Exception error)
+            {
+                ErrorDisplayer.Foreground = Brushes.Red;
+                ErrorDisplayer.Text = "*" + error.Message;
+            }
         }
     }
 }

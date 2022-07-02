@@ -11,7 +11,14 @@ namespace ProjectAP.Sources
         static List<Product> allProducts = new List<Product>();
         public static Account getAccount(string email)
         {
-            return allAccounts.Find(x => x.email == email);
+            try
+            {
+                return allAccounts.Single(x => x.email == email);
+            }
+            catch
+            {
+                throw new Exception("No email found");
+            }
         }
         public static void AddAccount(Account input)
         {

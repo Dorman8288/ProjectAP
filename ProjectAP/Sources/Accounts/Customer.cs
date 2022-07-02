@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectAP.Sources.Accounts
 {
-    class Customer : Account
+    public class Customer : Account
     {
         double _balance;
         public List<Product> inventory { get; } = new List<Product>();

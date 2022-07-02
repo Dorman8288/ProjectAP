@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ProjectAP.Sources.Accounts
 {
-    class Cart
+    public class Cart
     {
         public List<Product> allProducts { get; } = new List<Product>();
         public void AddToCart(params Product[] input)

@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ProjectAP.Sources.Accounts;
 
 namespace ProjectAP.admin_section_develop
 {
@@ -17,9 +18,11 @@ namespace ProjectAP.admin_section_develop
     /// </summary>
     public partial class admin_main_section : Window
     {
-        public admin_main_section()
+        Admin ActiveAccount;
+        public admin_main_section(Admin ActiveAccount)
         {
             InitializeComponent();
+            this.ActiveAccount = ActiveAccount;
         }
 
         private void ToggleButton_Checked(object sender, RoutedEventArgs e)

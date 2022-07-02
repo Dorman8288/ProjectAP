@@ -9,6 +9,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ProjectAP.Sources;
+using ProjectAP.Sources.Accounts;
 
 namespace ProjectAP
 {
@@ -17,9 +19,11 @@ namespace ProjectAP
     /// </summary>
     public partial class ApplicationWindow : Window
     {
-        public ApplicationWindow()
+        Customer ActiveAccount;
+        public ApplicationWindow(Customer ActiveAccount)
         {
             InitializeComponent();
+            this.ActiveAccount = ActiveAccount;
         }
 
         private void Store_Button_Click(object sender, RoutedEventArgs e)

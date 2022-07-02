@@ -5,7 +5,7 @@ using System.IO;
 
 namespace ProjectAP.Sources
 {
-    class Product
+    public class Product
     {
         string _name;
         int ID;
