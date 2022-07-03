@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="ProjectAP.Customer_Pages.ProductDisplayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectAP.Customer_Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="White">
+    <DockPanel Margin="10">
+        <WrapPanel DockPanel.Dock="Top">
+            <Button Click="Search_Button_Click" Background="Transparent" Foreground="{DynamicResource ForeGroundColor}" BorderThickness="0" Style="{StaticResource MaterialDesignToolButton}">
+                <materialDesign:PackIcon Kind="Search" Opacity="0.5"/>
+            </Button>
+            <TextBox Name="NameSearchBox" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}" materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}" Width="100" materialDesign:HintAssist.Hint="Name" Margin="10"/>
+            <TextBox Name="AuthorSearchBox" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}" materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}" Width="100" materialDesign:HintAssist.Hint="Author" Margin="10"/>
+        </WrapPanel>
+        <ScrollViewer DockPanel.Dock="Bottom">
+            <ItemsControl Name="Displayer">
+                <CommandBinding Command="ApplicationCommands.New" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Click="Select_Book_Button_Click" Padding="0" BorderThickness="0" Margin="5" Foreground="{DynamicResource ForeGroundColor}" Background="{DynamicResource PrimaryColor}" Width="150" Height="200">
+                            <materialDesign:ButtonAssist.CornerRadius>
+                                12
+                            </materialDesign:ButtonAssist.CornerRadius>
+                            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Image DockPanel.Dock="Top" Grid.Row="0" Source="{Binding imagePath}" Stretch="Fill"/>
+                                <TextBlock Grid.Row="1" Text="{Binding name}" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+</UserControl>

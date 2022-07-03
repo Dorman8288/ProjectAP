@@ -11,20 +11,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ProjectAP.Sources;
-using System.Linq;
-using System.Text.RegularExpressions;
-
 
 namespace ProjectAP.Customer_Pages
 {
     /// <summary>
-    /// Interaction logic for ProductsPage.xaml
+    /// Interaction logic for ProductProperty.xaml
     /// </summary>
-    public partial class ProductsPage : UserControl
+    public partial class ProductProperty : UserControl
     {
-        public ProductsPage()
+        public static Account ActiveAccount;
+        public static Product product;
+        public ProductProperty()
         {
             InitializeComponent();
+            //MessageBox.Show($"{product.name} {ActiveAccount.name}");
+            //ImageDisplayer.Source = new BitmapImage(new Uri(product.imagePath, UriKind.Relative));
         }
     }
 }

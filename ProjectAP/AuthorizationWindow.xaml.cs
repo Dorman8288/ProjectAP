@@ -25,6 +25,8 @@ namespace ProjectAP
             try
             {
                 DataManager.AddAccount(new Admin("Admin", "Admin", "Admin@gmail.com", "09385017532", "Admin1234"));
+                DataManager.AddAccount(new Customer("amdor", "amdor", "dorman8288@gmail.com", "09385017532", "Amdor8288"));
+                DataManager.AddProduct(new Product("testName", 1, 100, "this is simple test", @"FinalProject.pdf", 2, "TestAuthor", @"TestImage.jpg"));
             }
             catch
             {

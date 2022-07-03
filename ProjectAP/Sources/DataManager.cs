@@ -25,5 +25,14 @@ namespace ProjectAP.Sources
             if (allAccounts.Any(x => input.email == x.email)) throw new Exception("this email is registered");
             allAccounts.Add(input);
         }
+        public static List<Product> getAllProducts()
+        {
+            return allProducts;
+        }
+        public static void AddProduct(Product input)
+        {
+            if (allProducts.Any(x => input.ID == x.ID)) throw new Exception("this ID is registered");
+            allProducts.Add(input);
+        }
     }
 }

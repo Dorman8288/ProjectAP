@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjectAP.Customer_Pages"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ApplicationWindow" Height="450" Width="800"
+        Title="ApplicationWindow" Height="450" Width="830"
         WindowStartupLocation="CenterScreen">
     <materialDesign:DrawerHost x:Name="DrawerHost">
         <materialDesign:DrawerHost.Style>
@@ -93,47 +93,38 @@
                                       Mode="Custom"
                                       materialDesign:ColorZoneAssist.Background="{DynamicResource SeconderyColor}"
                                       materialDesign:ColorZoneAssist.Foreground="{DynamicResource ForeGroundColor}"
-                                      Padding="16">
+                                      Padding="10">
                 <DockPanel>
-                    <StackPanel
-                                  Orientation="Horizontal"
-                                  materialDesign:RippleAssist.IsCentered="True">
-                        <materialDesign:ColorZone
-                                            Mode="Standard"
-                                            Padding="8 4 8 4"
-                                            CornerRadius="2"
-                                            Panel.ZIndex="1"
-                                            Margin="16 0 0 0"
-                                            materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <WrapPanel DockPanel.Dock="Left">
+                        <materialDesign:ColorZone MouseDoubleClick="Wallet_MouseDoubleClick" Background="WhiteSmoke" Padding="2" Width="117" Height="40" CornerRadius="20" BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Center">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition  Width="Auto" />
-                                    <ColumnDefinition  Width="*" />
-                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="2.5*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Button
-                                         Style="{StaticResource MaterialDesignToolButton}">
-                                    <materialDesign:PackIcon Kind="Search" Opacity=".56" />
-
-                                </Button>
-                                <TextBox
-                                        Grid.Column="1"
-                                        Margin="8 0 0 0"
-                                        materialDesign:HintAssist.Hint="Search"
-                                        materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                        BorderThickness="0"
-                                        MinWidth="200"
-                                        VerticalAlignment="Center" />
+                                <materialDesign:PackIcon Margin="5" Grid.Column="0" Kind="WalletOutline" VerticalAlignment="Center" Opacity="0.7"/>
+                                <TextBlock Grid.Column="1" Name="BalanceDisplay" Text="11.0" VerticalAlignment="Center" HorizontalAlignment="Stretch" />
+                                <materialDesign:PackIcon Grid.Column="2" Kind="Dollar" VerticalAlignment="Center"  Opacity="0.5"/>
                             </Grid>
                         </materialDesign:ColorZone>
-                    </StackPanel>
+                    </WrapPanel>
+                    <materialDesign:Chip 
+                                         VerticalAlignment="Center" HorizontalAlignment="Right"
+                                         DockPanel.Dock="Right"
+                                         Name="CustomerChip"
+                                         Background="{DynamicResource PrimaryColor}"
+                                         Content="Default"
+                                         Icon="D"
+                                         Style="{StaticResource MaterialDesignOutlineChip}" />
                 </DockPanel>
             </materialDesign:ColorZone>
             <materialDesign:Transitioner Name="PageNavigator" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
-                <local:ProductsPage/>
+                <local:ProductDisplayer/>
                 <local:CartPage/>
                 <local:InventoryPage/>
                 <local:SettingsPage/>
+                <local:ProductProperty/>
             </materialDesign:Transitioner>
         </Grid>
     </materialDesign:DrawerHost>
