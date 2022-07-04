@@ -18,7 +18,6 @@
         </WrapPanel>
         <ScrollViewer DockPanel.Dock="Bottom">
             <ItemsControl Name="Displayer">
-                <CommandBinding Command="ApplicationCommands.New" Executed="CommandBinding_Executed" CanExecute="CommandBinding_CanExecute" />
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel/>

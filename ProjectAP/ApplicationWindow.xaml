@@ -124,7 +124,7 @@
                 <local:CartPage/>
                 <local:InventoryPage/>
                 <local:SettingsPage/>
-                <local:ProductProperty/>
+                <local:ProductProperty x:Name="Property"/>
             </materialDesign:Transitioner>
         </Grid>
     </materialDesign:DrawerHost>

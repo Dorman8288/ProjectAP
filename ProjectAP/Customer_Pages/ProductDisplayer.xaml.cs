@@ -34,12 +34,12 @@ namespace ProjectAP.Customer_Pages
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)
         {
-            ProductProperty.product = (sender as Button).DataContext as Product;
             foreach (Window window in Application.Current.Windows)
             {
                 if (window.GetType() == typeof(ApplicationWindow))
                 {
                     (window as ApplicationWindow).PageNavigator.SelectedIndex = 4;
+                    (window as ApplicationWindow).Property.DataContext = (sender as Button).DataContext as Product;
                 }
             }
         }
