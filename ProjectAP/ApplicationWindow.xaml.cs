@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
+using System.Collections.ObjectModel;
 
 namespace ProjectAP
 {
@@ -40,10 +41,10 @@ namespace ProjectAP
             try
             {
                 DataManager.AddAccount(new Admin("Admin", "Admin", "Admin@gmail.com", "09385017532", "Admin1234"));    
-                DataManager.AddProduct(new Product("testName1", 1, 100, "this is simple test1", @"FinalProject.pdf", 2, "TestAuthor1", @"../Resources/TestImage1.jpg"));
-                DataManager.AddProduct(new Product("testName2", 2, 100, "this is simple test2", @"FinalProject.pdf", 2, "TestAuthor2", @"../Resources/TestImage2.jpg"));
-                DataManager.AddProduct(new Product("testName3", 3, 100, "this is simple test3", @"FinalProject.pdf", 2, "TestAuthor3", @"../Resources/TestImage3.jpg"));
-                DataManager.AddProduct(new Product("testName4", 4, 100, "this is simple test4", @"FinalProject.pdf", 2, "TestAuthor4", @"../Resources/TestImage4.png"));
+                DataManager.AddProduct(new Product("testName1", 1, 100, "this is simple test1", @"..\..\..\Resources\FinalProject.pdf", 2, "TestAuthor1", @"../Resources/TestImage1.jpg"));
+                DataManager.AddProduct(new Product("testName2", 2, 100, "this is simple test2", @"..\..\..\Resources\FinalProject.pdf", 2, "TestAuthor2", @"../Resources/TestImage2.jpg"));
+                DataManager.AddProduct(new Product("testName3", 3, 100, "this is simple test3", @"..\..\..\Resources\FinalProject.pdf", 2, "TestAuthor3", @"../Resources/TestImage3.jpg"));
+                DataManager.AddProduct(new Product("testName4", 4, 100, "this is simple test4", @"..\..\..\Resources\FinalProject.pdf", 2, "TestAuthor4", @"../Resources/TestImage4.png"));
             }
             catch
             {
@@ -63,7 +64,10 @@ namespace ProjectAP
 
         private void Inventory_Button_Click(object sender, RoutedEventArgs e)
         {
+            ObservableCollection<Product> OC = new ObservableCollection<Product>();
+            ActiveAccount.inventory.ForEach(x => OC.Add(x));
             PageNavigator.SelectedIndex = 2;
+            inventory.Displayer.ItemsSource = OC;
         }
 
         private void Settings_Button_Click(object sender, RoutedEventArgs e)

@@ -12,7 +12,7 @@ namespace ProjectAP.Sources
         int _rating;
         double _price;
         string _description;
-        string filePath;
+        public string filePath { get; }
         double _discount;
         string _author;
         public string imagePath { get; }

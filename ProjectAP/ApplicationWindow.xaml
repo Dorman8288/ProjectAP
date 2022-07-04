@@ -122,7 +122,7 @@
             <materialDesign:Transitioner Name="PageNavigator" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
                 <local:ProductDisplayer/>
                 <local:CartPage/>
-                <local:InventoryPage/>
+                <local:InventoryPage x:Name="inventory"/>
                 <local:SettingsPage/>
                 <local:ProductProperty x:Name="Property"/>
             </materialDesign:Transitioner>

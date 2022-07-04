@@ -14,6 +14,10 @@ using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.ServiceProcess;
+using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectAP.Customer_Pages
 {
@@ -26,7 +30,6 @@ namespace ProjectAP.Customer_Pages
         public InventoryPage()
         {
             InitializeComponent();
-            Displayer.ItemsSource = ActiveAccount.inventory;
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -35,7 +38,11 @@ namespace ProjectAP.Customer_Pages
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            //System.Diagnostics.Process.Start(((sender as Button).DataContext as Product).filePath);
+            Process opening = new Process();
+            opening.StartInfo.UseShellExecute = true;
+            opening.StartInfo.FileName = ((sender as Button).DataContext as Product).filePath;
+            opening.Start();
         }
     }
 }
