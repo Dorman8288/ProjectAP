@@ -12,9 +12,10 @@ using System.Windows.Shapes;
 
 namespace ProjectAP.admin_section_develop
 {
-    /// <summary>
-    /// Interaction logic for admin_main_section.xaml
-    /// </summary>
+    public class book
+    {
+
+    }
     public partial class admin_main_section : Window
     {
         public admin_main_section()
@@ -27,9 +28,22 @@ namespace ProjectAP.admin_section_develop
 
         }
 
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
+
+        private void creat_book(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void TextBox_TextChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
+        
+
     }
 }
