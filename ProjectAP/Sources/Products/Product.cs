@@ -8,12 +8,20 @@ namespace ProjectAP.Sources
     public class Product
     {
         string _name;
-        int ID;
+        public int ID { get; }
         int _rating;
         double _price;
         string _description;
-        string filePath;
+        public string filePath { get; }
         double _discount;
+        string _author;
+        public string imagePath { get; }
+        public bool isVip { get; } = false;
+        public string author
+        {
+            get { return _author; }
+            private set { if (value == "") throw new Exception("Product name cannot be empty"); else _author = value; }
+        }
         public double discount
         {
             get { return _discount; }
@@ -50,7 +58,7 @@ namespace ProjectAP.Sources
         {
             discount = (double)value / 100;
         }
-        public Product(string name, int ID, double price, string description, string filePath, int rating)
+        public Product(string name, int ID, double price, string description, string filePath, int rating, string author, string imagePath, bool isVip)
         {
             this.name = name;
             this.ID = ID;
@@ -58,6 +66,9 @@ namespace ProjectAP.Sources
             this.description = description;
             this.filePath = filePath;
             this.rating = rating;
+            this.author = author;
+            this.imagePath = imagePath;
+            this.isVip = isVip;
         }
         public double CalculatePrice()
         {

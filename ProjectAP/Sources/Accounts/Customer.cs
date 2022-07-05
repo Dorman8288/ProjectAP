@@ -11,10 +11,10 @@ namespace ProjectAP.Sources.Accounts
         public List<Product> bookMarks { get; } = new List<Product>();
         public Cart cart { get; } = new Cart();
         public DateTime VIPExpieringDate;
-        double balance
+        public double balance
         {
-            get { return balance; }
-            set { if (value < 0) throw new Exception("balanace cant be negetive"); else _balance = value; }
+            get { return _balance; }
+            private set { if (value < 0) throw new Exception("balanace cant be negetive"); else _balance = value; }
         }
         public Customer(string name, string familyName, string email, string phoneNumber, string password) : base(name, familyName, email, phoneNumber, password)
         {
@@ -27,6 +27,10 @@ namespace ProjectAP.Sources.Accounts
         public void AddBalance(double value)
         {
             balance += value;
+        }
+        public bool HaveVip()
+        {
+            return DateTime.Now < VIPExpieringDate;
         }
         public void CheckOut()
         {

@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\FinalProject.pdf" />
     <None Remove="Images\ShopLogo.png" />
+    <None Remove="Resources\TestImage1.jpg" />
+    <None Remove="Resources\TestImage2.jpg" />
+    <None Remove="Resources\TestImage3.jpg" />
+    <None Remove="Resources\TestImage4.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,7 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\FinalProject.pdf" />
     <Resource Include="Images\ShopLogo.png" />
+    <Resource Include="Resources\TestImage1.jpg" />
+    <Resource Include="Resources\TestImage2.jpg" />
+    <Resource Include="Resources\TestImage3.jpg" />
+    <Resource Include="Resources\TestImage4.png" />
   </ItemGroup>
 
 </Project>
