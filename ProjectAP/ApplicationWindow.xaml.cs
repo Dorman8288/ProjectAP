@@ -22,5 +22,31 @@ namespace ProjectAP
             InitializeComponent();
         }
 
+        private void Store_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageNavigator.SelectedIndex = 0;
+        }
+
+        private void Cart_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageNavigator.SelectedIndex = 1;
+        }
+
+        private void Inventory_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageNavigator.SelectedIndex = 2;
+        }
+
+        private void Settings_Button_Click(object sender, RoutedEventArgs e)
+        {
+            PageNavigator.SelectedIndex = 3;
+        }
+
+        private void SignOut_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorizationWindow window = new AuthorizationWindow();
+            window.Show();
+            Close();
+        }
     }
 }
