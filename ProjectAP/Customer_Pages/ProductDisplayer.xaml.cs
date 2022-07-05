@@ -14,22 +14,19 @@ using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.IO;
-using System.ServiceProcess;
-using System.Diagnostics;
-using System.ComponentModel.DataAnnotations;
 
 namespace ProjectAP.Customer_Pages
 {
     /// <summary>
-    /// Interaction logic for InventoryPage.xaml
+    /// Interaction logic for ProductDisplayer.xaml
     /// </summary>
-    public partial class InventoryPage : UserControl
+    public partial class ProductDisplayer : UserControl
     {
-        public static Customer ActiveAccount;
-        public InventoryPage()
+        public ProductDisplayer()
         {
             InitializeComponent();
+            MessageBox.Show(DataManager.getAllNonVipProducts().Count().ToString());
+            Displayer.ItemsSource = DataManager.getAllNonVipProducts();
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -38,11 +35,24 @@ namespace ProjectAP.Customer_Pages
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)
         {
-            //System.Diagnostics.Process.Start(((sender as Button).DataContext as Product).filePath);
-            Process opening = new Process();
-            opening.StartInfo.UseShellExecute = true;
-            opening.StartInfo.FileName = ((sender as Button).DataContext as Product).filePath;
-            opening.Start();
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(ApplicationWindow))
+                {
+                    (window as ApplicationWindow).PageNavigator.SelectedIndex = 4;
+                    (window as ApplicationWindow).Property.DataContext = (sender as Button).DataContext as Product;
+                }
+            }
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            
+        }
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
         }
     }
 }

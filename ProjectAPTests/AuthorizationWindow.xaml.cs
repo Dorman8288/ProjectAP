@@ -8,19 +8,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjectAP.Sources;
 
-namespace ProjectAP.Customer_Pages
+namespace ProjectAP
 {
     /// <summary>
-    /// Interaction logic for ProductsPage.xaml
+    /// Interaction logic for AuthorizationWindow.xaml
     /// </summary>
-    public partial class ProductsPage : UserControl
+    public partial class AuthorizationWindow : Window
     {
-        public ProductsPage()
+        public AuthorizationWindow()
         {
             InitializeComponent();
+            Account testAccount;
+            //DataManager.AddAccount();
         }
     }
 }

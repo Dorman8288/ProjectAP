@@ -14,22 +14,25 @@ using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.IO;
-using System.ServiceProcess;
 using System.Diagnostics;
-using System.ComponentModel.DataAnnotations;
 
 namespace ProjectAP.Customer_Pages
 {
     /// <summary>
-    /// Interaction logic for InventoryPage.xaml
+    /// Interaction logic for VipPage.xaml
     /// </summary>
-    public partial class InventoryPage : UserControl
+    public partial class VipPage : UserControl
     {
         public static Customer ActiveAccount;
-        public InventoryPage()
+        public VipPage()
         {
             InitializeComponent();
+            Displayer.ItemsSource = DataManager.getAllVIPProducts();
+        }
+
+        private void VIP_Buy_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -38,11 +41,18 @@ namespace ProjectAP.Customer_Pages
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)
         {
-            //System.Diagnostics.Process.Start(((sender as Button).DataContext as Product).filePath);
-            Process opening = new Process();
-            opening.StartInfo.UseShellExecute = true;
-            opening.StartInfo.FileName = ((sender as Button).DataContext as Product).filePath;
-            opening.Start();
+            if (ActiveAccount.HaveVip())
+            {
+                Process opening = new Process();
+                opening.StartInfo.UseShellExecute = true;
+                opening.StartInfo.FileName = ((sender as Button).DataContext as Product).filePath;
+                opening.Start();
+            }
+            else
+            {
+                MessageBox.Show("You dont have VIP");
+            }
+            
         }
     }
 }
