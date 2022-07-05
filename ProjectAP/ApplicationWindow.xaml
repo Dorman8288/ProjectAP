@@ -72,6 +72,16 @@
                         Margin="4"
                         HorizontalAlignment="Stretch"
                         Style="{StaticResource MaterialDesignFlatButton}"
+                        Click="Vip_Button_Click">
+                    <DockPanel>
+                        <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Star" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBlock Text="VIP" DockPanel.Dock="right" Foreground="{DynamicResource ForeGroundColor}"/>
+                    </DockPanel>
+                </Button>
+                <Button
+                        Margin="4"
+                        HorizontalAlignment="Stretch"
+                        Style="{StaticResource MaterialDesignFlatButton}"
                         Click="Settings_Button_Click">
                     <DockPanel>
                         <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Settings" Foreground="{DynamicResource ForeGroundColor}"/>
@@ -121,10 +131,11 @@
             </materialDesign:ColorZone>
             <materialDesign:Transitioner Name="PageNavigator" Grid.Row="1" Grid.Column="1" SelectedIndex="0">
                 <local:ProductDisplayer/>
-                <local:CartPage/>
+                <local:CartPage x:Name="Cart"/>
                 <local:InventoryPage x:Name="inventory"/>
                 <local:SettingsPage/>
                 <local:ProductProperty x:Name="Property"/>
+                <local:VipPage x:Name="Vip"/>
             </materialDesign:Transitioner>
         </Grid>
     </materialDesign:DrawerHost>

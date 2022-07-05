@@ -9,6 +9,41 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Background="White">
     <Grid>
-        <Button/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Button Click="Buy_Button_Click" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Width="200" Height="70" materialDesign:ButtonAssist.CornerRadius="20" Background="MediumSeaGreen" BorderBrush="Transparent" Foreground="Black">
+            <WrapPanel>
+                <materialDesign:PackIcon Kind="Dollar" Foreground="{DynamicResource ForeGroundColor}" Width="30" Height="30"/>
+                <TextBlock VerticalAlignment="Center" Name="BuyButton" FontSize="14"/>
+            </WrapPanel>
+        </Button>
+        <Button Click="Remove_Button_Click" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Width="200" Height="70" materialDesign:ButtonAssist.CornerRadius="20" Background="MediumSeaGreen" BorderBrush="Transparent" Foreground="Black">
+            <WrapPanel>
+                <materialDesign:PackIcon Kind="Remove" Foreground="{DynamicResource ForeGroundColor}" Width="30" Height="30"/>
+                <TextBlock VerticalAlignment="Center" Text="Remove From Cart" FontSize="16"/>
+            </WrapPanel>
+        </Button>
+        <ScrollViewer Grid.Row="0" Grid.ColumnSpan="2">
+            <ListBox HorizontalContentAlignment="Stretch" Name="CartDisplayer" Margin="30">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding name}" />
+                            <TextBlock TextAlignment="Right" Text="{Binding price}" Grid.Column="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
     </Grid>
 </UserControl>

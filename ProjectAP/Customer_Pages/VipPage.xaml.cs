@@ -14,19 +14,25 @@ using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace ProjectAP.Customer_Pages
 {
     /// <summary>
-    /// Interaction logic for ProductDisplayer.xaml
+    /// Interaction logic for VipPage.xaml
     /// </summary>
-    public partial class ProductDisplayer : UserControl
+    public partial class VipPage : UserControl
     {
-        public ProductDisplayer()
+        public static Customer ActiveAccount;
+        public VipPage()
         {
             InitializeComponent();
-            MessageBox.Show(DataManager.getAllNonVipProducts().Count().ToString());
-            Displayer.ItemsSource = DataManager.getAllNonVipProducts();
+            Displayer.ItemsSource = DataManager.getAllVIPProducts();
+        }
+
+        private void VIP_Buy_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -35,24 +41,18 @@ namespace ProjectAP.Customer_Pages
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Window window in Application.Current.Windows)
+            if (ActiveAccount.HaveVip())
             {
-                if (window.GetType() == typeof(ApplicationWindow))
-                {
-                    (window as ApplicationWindow).PageNavigator.SelectedIndex = 4;
-                    (window as ApplicationWindow).Property.DataContext = (sender as Button).DataContext as Product;
-                }
+                Process opening = new Process();
+                opening.StartInfo.UseShellExecute = true;
+                opening.StartInfo.FileName = ((sender as Button).DataContext as Product).filePath;
+                opening.Start();
             }
-        }
-
-        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
-        {
+            else
+            {
+                MessageBox.Show("You dont have VIP");
+            }
             
-        }
-
-        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-        {
-            e.CanExecute = true;
         }
     }
 }

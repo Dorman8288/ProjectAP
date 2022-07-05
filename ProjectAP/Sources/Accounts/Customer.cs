@@ -28,6 +28,10 @@ namespace ProjectAP.Sources.Accounts
         {
             balance += value;
         }
+        public bool HaveVip()
+        {
+            return DateTime.Now < VIPExpieringDate;
+        }
         public void CheckOut()
         {
             balance -= cart.CalculatePrice();

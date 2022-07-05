@@ -16,6 +16,7 @@ namespace ProjectAP.Sources
         double _discount;
         string _author;
         public string imagePath { get; }
+        public bool isVip { get; } = false;
         public string author
         {
             get { return _author; }
@@ -57,7 +58,7 @@ namespace ProjectAP.Sources
         {
             discount = (double)value / 100;
         }
-        public Product(string name, int ID, double price, string description, string filePath, int rating, string author, string imagePath)
+        public Product(string name, int ID, double price, string description, string filePath, int rating, string author, string imagePath, bool isVip)
         {
             this.name = name;
             this.ID = ID;
@@ -67,6 +68,7 @@ namespace ProjectAP.Sources
             this.rating = rating;
             this.author = author;
             this.imagePath = imagePath;
+            this.isVip = isVip;
         }
         public double CalculatePrice()
         {
