@@ -15,7 +15,7 @@ namespace ProjectAP.Sources
         public string name
         {
             get { return _name; }
-            private set
+            set
             {
                 if (!Regex.IsMatch(value, @"^\w{3,32}$")) throw new Exception("FirstName is not in the correct format");
                 _name = value;
@@ -24,7 +24,7 @@ namespace ProjectAP.Sources
         public string familyName
         {
             get { return _familyName; }
-            private set
+            set
             {
                 if (!Regex.IsMatch(value, @"^[A-Za-z]{3,32}$")) throw new Exception("LastName is not in the correct format");
                 _familyName = value;
@@ -33,7 +33,7 @@ namespace ProjectAP.Sources
         public string email
         {
             get { return _email; }
-            private set
+            set
             {
                 if (!Regex.IsMatch(value, @"^\w{1,32}@\w{1,32}\.\w{1,32}$")) throw new Exception("email is not in the correct format");
                 _email = value;
@@ -42,7 +42,7 @@ namespace ProjectAP.Sources
         public string phoneNumber
         {
             get { return _phoneNumber; }
-            private set
+            set
             {
                 if (!Regex.IsMatch(value, @"^09\d{9}$")) throw new Exception("phone number is not in the correct format");
                 _phoneNumber = value;
@@ -51,7 +51,7 @@ namespace ProjectAP.Sources
         public string password
         {
             get { return _password; }
-            private set
+            set
             {
                 if (!Regex.IsMatch(value, @"^(?=.*[a-z])(?=.*[A-Z]).{8,40}$")) throw new Exception("Password is not in the correct format");
                 _password = value;

@@ -40,6 +40,7 @@ namespace ProjectAP
             Customer_Pages.InventoryPage.ActiveAccount = ActiveAccount;
             Customer_Pages.CartPage.ActiveAccount = ActiveAccount;
             Customer_Pages.VipPage.ActiveAccount = ActiveAccount;
+            Customer_Pages.SettingsPage.ActiveAccount = ActiveAccount;
             try
             {
                 DataManager.AddAccount(new Admin("Admin", "Admin", "Admin@gmail.com", "09385017532", "Admin1234"));    
@@ -96,6 +97,16 @@ namespace ProjectAP
         private void Vip_Button_Click(object sender, RoutedEventArgs e)
         {
             PageNavigator.SelectedIndex = 5;
+            if (ActiveAccount.HaveVip())
+            {
+                Vip.buyButton.IsEnabled = false;
+                Vip.buyButton.Content = $"You have VIP until {ActiveAccount.VIPExpieringDate}";
+            }
+            else
+            {
+                Vip.buyButton.IsEnabled = true;
+                Vip.buyButton.Content = $"Buy VIP";
+            }
         }
     }
 }

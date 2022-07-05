@@ -4,9 +4,86 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectAP.Customer_Pages"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="White">
+    <Grid Margin="20 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel VerticalAlignment="Center" Grid.Row="1">
+            <Button Click="Apply_Button_Click" VerticalAlignment="Center" Width="400" Height="50" materialDesign:ButtonAssist.CornerRadius="20" Background="MediumSeaGreen" BorderThickness="0" Content="Apply" Foreground="{DynamicResource ForeGroundColor}"/>
+            <TextBlock Name="ErrorDisplayer" HorizontalAlignment="Center" Foreground="Red" FontSize="20"/>
+        </StackPanel>
+        
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="36*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--مشخصات کاربر-->
+            <materialDesign:PackIcon HorizontalAlignment="Right" Grid.Row="3" Grid.Column="0" Kind="Phone" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+            <TextBox Grid.Row="3" Grid.Column="2"
+                          Name="phoneNumberTextBox"
+                          MaxLength="11"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="PhoneNumber"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+            <materialDesign:PackIcon HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0" Kind="User" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+            <TextBox Grid.Row="1" Grid.Column="2"
+                          Name="FirstNameTextBox"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="FirstName"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+            <materialDesign:PackIcon HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0" Kind="AccountBoxOutline" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+            <TextBox Grid.Row="2" Grid.Column="2"
+                          Name="LastNameTextBox"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="LastName"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+            <materialDesign:PackIcon HorizontalAlignment="Right" Grid.Column="0" Kind="Email" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+            <TextBox Grid.Column="2"
+                          Name="EmailTextBox"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Email"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+            <materialDesign:PackIcon HorizontalAlignment="Right" Grid.Row="4" Grid.Column="0" Kind="Password" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+            <PasswordBox
+                          Grid.Row="4" Grid.Column="2"
+                          Name="PasswordTextbox"
+                          VerticalAlignment="Center"
+                          BorderBrush="{DynamicResource ForeGroundColor}"
+                          Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:HintAssist.Hint="Password"
+                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                          materialDesign:HintAssist.HelperText="At least one small and capital letters"/>
+        </Grid>
     </Grid>
 </UserControl>

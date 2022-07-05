@@ -22,11 +22,12 @@ namespace ProjectAP.Customer_Pages
     /// </summary>
     public partial class ProductDisplayer : UserControl
     {
+        List<Product> nonVipProducts;
         public ProductDisplayer()
         {
             InitializeComponent();
-            MessageBox.Show(DataManager.getAllNonVipProducts().Count().ToString());
-            Displayer.ItemsSource = DataManager.getAllNonVipProducts();
+            nonVipProducts = DataManager.getAllNonVipProducts();
+            Displayer.ItemsSource = nonVipProducts;
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {

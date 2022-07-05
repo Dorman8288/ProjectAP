@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
 
 namespace ProjectAP.Sources.Accounts
 {
@@ -14,7 +15,7 @@ namespace ProjectAP.Sources.Accounts
         public double balance
         {
             get { return _balance; }
-            private set { if (value < 0) throw new Exception("balanace cant be negetive"); else _balance = value; }
+            set { if (value < 0) throw new Exception("balanace cant be negetive"); else _balance = value; }
         }
         public Customer(string name, string familyName, string email, string phoneNumber, string password) : base(name, familyName, email, phoneNumber, password)
         {
@@ -31,6 +32,10 @@ namespace ProjectAP.Sources.Accounts
         public bool HaveVip()
         {
             return DateTime.Now < VIPExpieringDate;
+        }
+        public void AddVip(int month)
+        {
+            VIPExpieringDate = VIPExpieringDate.AddMonths(month);
         }
         public void CheckOut()
         {

@@ -32,7 +32,9 @@ namespace ProjectAP.Customer_Pages
 
         private void VIP_Buy_Button_Click(object sender, RoutedEventArgs e)
         {
-
+            ActiveAccount.AddVip(1);
+            buyButton.IsEnabled = false;
+            buyButton.Content = $"You have VIP until {ActiveAccount.VIPExpieringDate}";
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
