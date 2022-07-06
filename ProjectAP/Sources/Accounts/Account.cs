@@ -17,7 +17,7 @@ namespace ProjectAP.Sources
             get { return _name; }
             set
             {
-                if (!Regex.IsMatch(value, @"^\w{3,32}$")) throw new Exception("FirstName is not in the correct format");
+                if (!Regex.IsMatch(value, @"^[A-Za-z]{3,32}$")) throw new Exception("FirstName is not in the correct format");
                 _name = value;
             }
         }

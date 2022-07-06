@@ -15,6 +15,7 @@ using ProjectAP.Sources.Accounts;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using MaterialDesignThemes.Wpf;
 
 namespace ProjectAP.Customer_Pages
 {
@@ -32,6 +33,8 @@ namespace ProjectAP.Customer_Pages
 
         private void VIP_Buy_Button_Click(object sender, RoutedEventArgs e)
         {
+            if (ApplicationWindow.transactionResult)
+                MessageBox.Show("yes");
             ActiveAccount.AddVip(1);
             buyButton.IsEnabled = false;
             buyButton.Content = $"You have VIP until {ActiveAccount.VIPExpieringDate}";

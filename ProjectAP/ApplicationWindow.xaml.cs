@@ -21,6 +21,7 @@ namespace ProjectAP
     public partial class ApplicationWindow : Window
     {
         public Customer ActiveAccount;
+        public static bool transactionResult;
         public ApplicationWindow(Customer ActiveAccount)
         {
             InitializeComponent();
@@ -107,6 +108,41 @@ namespace ProjectAP
                 Vip.buyButton.IsEnabled = true;
                 Vip.buyButton.Content = $"Buy VIP";
             }
+        }
+
+        private void Accept_Transaction_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (ActiveAccount.CardIsValid(CardNumber.Text, CVV2.Text, int.Parse(Year.Text), int.Parse(Month.Text)))
+                {
+                    dialogeHost.IsOpen = false;
+                }
+                else
+                {
+                    information.Foreground = Brushes.Red;
+                    information.Text = "Your Card Information is not valid!";
+                }
+            }
+            catch
+            {
+                information.Foreground = Brushes.Red;
+                information.Text = "Your Card Information is not valid!";
+            }
+            
+        }
+
+        private void dialogeHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+        {
+            if(!Equals(eventArgs.Parameter, true))
+            {
+                transactionResult = false;
+            }
+            else
+            {
+                transactionResult = true;
+            }
+            return;
         }
     }
 }
