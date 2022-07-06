@@ -8,6 +8,7 @@ namespace ProjectAP.Sources.Accounts
     public class Customer : Account
     {
         double _balance;
+        double _totalSell = 0;
         public List<Product> inventory { get; } = new List<Product>();
         public List<Product> bookMarks { get; } = new List<Product>();
         public Cart cart { get; } = new Cart();
@@ -16,6 +17,11 @@ namespace ProjectAP.Sources.Accounts
         {
             get { return _balance; }
             set { if (value < 0) throw new Exception("balanace cant be negetive"); else _balance = value; }
+        }
+        public double totalSell
+        {
+            get { return _totalSell; }
+            set { if (value < 0) throw new Exception("balanace cant be negetive"); else _totalSell = value; }
         }
         public Customer(string name, string familyName, string email, string phoneNumber, string password) : base(name, familyName, email, phoneNumber, password)
         {

@@ -16,6 +16,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using MaterialDesignThemes.Wpf;
+using ProjectAP.Dialogs;
 
 namespace ProjectAP.Customer_Pages
 {
@@ -33,11 +34,14 @@ namespace ProjectAP.Customer_Pages
 
         private void VIP_Buy_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ApplicationWindow.transactionResult)
-                MessageBox.Show("yes");
-            ActiveAccount.AddVip(1);
-            buyButton.IsEnabled = false;
-            buyButton.Content = $"You have VIP until {ActiveAccount.VIPExpieringDate}";
+            transaction_Dialog dialog = new transaction_Dialog(1000 ,ActiveAccount);
+            dialog.ShowDialog();
+            if (dialog.transactionResult)
+            {
+                ActiveAccount.AddVip(1);
+                buyButton.IsEnabled = false;
+                buyButton.Content = $"You have VIP until {ActiveAccount.VIPExpieringDate}";
+            }
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -55,7 +59,7 @@ namespace ProjectAP.Customer_Pages
             }
             else
             {
-                MessageBox.Show("You dont have VIP");
+                MessageBox.Show("You dont have VIP" ,"Information", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             
         }

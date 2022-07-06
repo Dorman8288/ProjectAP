@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Collections.ObjectModel;
+using ProjectAP.Dialogs;
 
 namespace ProjectAP
 {
@@ -33,7 +34,6 @@ namespace ProjectAP
             InitializeComponent();
             DataManager.AddAccount(new Customer("amdor", "amdor", "dorman8288@gmail.com", "09385017532", "Amdor8288"));
             ActiveAccount = DataManager.getAccount("dorman8288@gmail.com") as Customer;
-            ActiveAccount.AddBalance(123412.543);
             CustomerChip.Icon = char.ToUpper(ActiveAccount.name[0]);
             CustomerChip.Content = ActiveAccount.name + ' ' + ActiveAccount.familyName;
             BalanceDisplay.Text = ActiveAccount.balance.ToString();
@@ -42,6 +42,7 @@ namespace ProjectAP
             Customer_Pages.CartPage.ActiveAccount = ActiveAccount;
             Customer_Pages.VipPage.ActiveAccount = ActiveAccount;
             Customer_Pages.SettingsPage.ActiveAccount = ActiveAccount;
+            BalanceDisplay.DataContext = ActiveAccount;
             try
             {
                 DataManager.AddAccount(new Admin("Admin", "Admin", "Admin@gmail.com", "09385017532", "Admin1234"));    
@@ -92,7 +93,8 @@ namespace ProjectAP
 
         private void Wallet_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("hello");
+            ChargeWalletDialog dialog = new ChargeWalletDialog(ActiveAccount);
+            dialog.ShowDialog();
         }
 
         private void Vip_Button_Click(object sender, RoutedEventArgs e)
@@ -108,41 +110,6 @@ namespace ProjectAP
                 Vip.buyButton.IsEnabled = true;
                 Vip.buyButton.Content = $"Buy VIP";
             }
-        }
-
-        private void Accept_Transaction_Button_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                if (ActiveAccount.CardIsValid(CardNumber.Text, CVV2.Text, int.Parse(Year.Text), int.Parse(Month.Text)))
-                {
-                    dialogeHost.IsOpen = false;
-                }
-                else
-                {
-                    information.Foreground = Brushes.Red;
-                    information.Text = "Your Card Information is not valid!";
-                }
-            }
-            catch
-            {
-                information.Foreground = Brushes.Red;
-                information.Text = "Your Card Information is not valid!";
-            }
-            
-        }
-
-        private void dialogeHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
-        {
-            if(!Equals(eventArgs.Parameter, true))
-            {
-                transactionResult = false;
-            }
-            else
-            {
-                transactionResult = true;
-            }
-            return;
         }
     }
 }
