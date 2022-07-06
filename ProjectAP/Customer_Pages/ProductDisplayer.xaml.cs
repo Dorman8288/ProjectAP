@@ -23,6 +23,7 @@ namespace ProjectAP.Customer_Pages
     public partial class ProductDisplayer : UserControl
     {
         List<Product> nonVipProducts;
+        public static Customer ActiveAccount;
         public ProductDisplayer()
         {
             InitializeComponent();
@@ -31,7 +32,8 @@ namespace ProjectAP.Customer_Pages
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
-            Displayer.ItemsSource = Displayer.ItemsSource.Cast<Product>().Where(x => Regex.IsMatch(x.name, @"^.*" + NameSearchBox.Text + @".*$") && Regex.IsMatch(x.author, @"^.*" + AuthorSearchBox.Text + @".*$"));
+            MessageBox.Show(ActiveAccount.bookMarks.Count.ToString());
+            Displayer.ItemsSource = Displayer.ItemsSource.Cast<Product>().Where(x => Regex.IsMatch(x.name, @"^.*" + NameSearchBox.Text + @".*$") && Regex.IsMatch(x.author, @"^.*" + AuthorSearchBox.Text + @".*$") && ActiveAccount.bookMarks.Contains(x) == BookMarkCheckBox.IsChecked);
         }
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)

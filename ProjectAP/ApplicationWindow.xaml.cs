@@ -42,6 +42,7 @@ namespace ProjectAP
             Customer_Pages.CartPage.ActiveAccount = ActiveAccount;
             Customer_Pages.VipPage.ActiveAccount = ActiveAccount;
             Customer_Pages.SettingsPage.ActiveAccount = ActiveAccount;
+            Customer_Pages.ProductDisplayer.ActiveAccount = ActiveAccount;
             BalanceDisplay.DataContext = ActiveAccount;
             try
             {

@@ -41,7 +41,6 @@ namespace ProjectAP.Customer_Pages
                 }
             }
             BuyButtonText.Text = "Add to Cart";
-            bookmarkToggle.IsChecked = false;
         }
 
         private void Add_To_Cart_Button_Click(object sender, RoutedEventArgs e)
@@ -62,6 +61,7 @@ namespace ProjectAP.Customer_Pages
             {
                 bookmarkToggle.IsChecked = true;
             }
+            MessageBox.Show(ActiveAccount.bookMarks.Count.ToString());
         }
 
         private void bookmarkToggle_Unchecked(object sender, RoutedEventArgs e)
