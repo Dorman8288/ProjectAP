@@ -65,5 +65,10 @@
                 <TextBlock VerticalAlignment="Center" Text="{Binding price}"/>
             </WrapPanel>
         </Button>
+        <materialDesign:RatingBar Grid.Row="4" Grid.Column="1"
+                              IsEnabled="False"
+                              x:Name="BasicRatingBar"
+                              Value="0"
+                              ValueChanged="BasicRatingBar_ValueChanged" />
     </Grid>
 </UserControl>

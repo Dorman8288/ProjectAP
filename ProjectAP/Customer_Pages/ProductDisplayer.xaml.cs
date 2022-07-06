@@ -40,8 +40,19 @@ namespace ProjectAP.Customer_Pages
             {
                 if (window.GetType() == typeof(ApplicationWindow))
                 {
-                    (window as ApplicationWindow).PageNavigator.SelectedIndex = 4;
-                    (window as ApplicationWindow).Property.DataContext = (sender as Button).DataContext as Product;
+                    ApplicationWindow appWindow = window as ApplicationWindow;
+                    Product product = (sender as Button).DataContext as Product;
+                    appWindow.PageNavigator.SelectedIndex = 4;
+                    appWindow.Property.DataContext = product;
+                    if (appWindow.ActiveAccount.inventory.Contains(product))
+                    {
+                        appWindow.Property.BasicRatingBar.IsEnabled = true;
+                    }
+                    else
+                    {
+                        appWindow.Property.BasicRatingBar.IsEnabled = false;
+                        appWindow.Property.BasicRatingBar.Value = 0;
+                    }
                 }
             }
         }

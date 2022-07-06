@@ -83,5 +83,10 @@ namespace ProjectAP.Customer_Pages
                 ActiveAccount.inventory.Add(DataContext as Product);
             }
         }
+
+        private void BasicRatingBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<int> e)
+        {
+            (DataContext as Product).addRating(BasicRatingBar.Value);
+        }
     }
 }

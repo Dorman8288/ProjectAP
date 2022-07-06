@@ -10,6 +10,7 @@ namespace ProjectAP.Sources
         string _name;
         public int ID { get; }
         int _rating;
+        int numOfRatings = 0;
         double _price;
         string _description;
         public string filePath { get; }
@@ -73,6 +74,11 @@ namespace ProjectAP.Sources
         public double CalculatePrice()
         {
             return price * (1 - discount);
+        }
+        public void addRating(int value)
+        {
+            rating = ((rating * numOfRatings) + value) / (numOfRatings + 1);
+            numOfRatings++;
         }
     }
 }
