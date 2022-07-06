@@ -41,16 +41,20 @@
     Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem 
       Header="VIP setting">
+
                             <Grid Width="725" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="512*"/>
 
                                     <ColumnDefinition Width="213*"/>
                                 </Grid.ColumnDefinitions>
+
+                                <!--error-->
+                                <TextBlock Name="account_setting_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,40,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
                                 <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="0,0,-513,0" />
                                 <Grid Grid.Column="0">
                                     <materialDesign:PackIcon Kind="CurrencyUsd" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="73,105,0,0"/>
-                                    <TextBox 
+                                    <TextBox Name="VIP_value_account"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Monthly subscription fee"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -60,7 +64,7 @@
                           BorderBrush="{DynamicResource ForeGroundColor}" Margin="100,93,86,0"/>
 
                                     <!--Apply-->
-                                    <Button Margin="0,262,0,89" HorizontalAlignment="Center"
+                                    <Button Margin="128,232,128,119" Click="Account_apply_vip_value"
   Style="{StaticResource MaterialDesignRaisedButton}"
   materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
   Content="Apply" Height="35" Width="256" />
@@ -109,8 +113,11 @@
 
 
                     <!--search-->
-                    <materialDesign:PackIcon Kind="Search" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="21,23,0,0"/>
-                    <TextBox
+                    <Button BorderThickness="0" Background="Transparent" Height="25" Width="25" Margin="23,22,195,15"    Click="Book_search_book">
+
+                    </Button>
+                    <materialDesign:PackIcon Kind="Search" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="19,21,0,0" />
+                    <TextBox Name="Book_search_nameorcode"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Search (name or code)"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -279,7 +286,7 @@
 
 
 
-            <TabItem >
+            <TabItem  >
                 <TabItem.Header>
                     <StackPanel
           Width="auto"
@@ -296,6 +303,67 @@
                     </StackPanel>
                 </TabItem.Header>
 
+
+                <Grid Background="#b3c9c4">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Height="100" Width="300" CornerRadius="10" Grid.Row="0"
+     BorderThickness="5" BorderBrush="DarkGray" Background="#defaf3" Margin="5"/>
+
+                    <TextBlock Grid.Row="0" Name="wallet_value"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"  Foreground="DarkBlue"></TextBlock>
+                    <Button Grid.Row="0" Name="wallet_show" Click="wallet_show_Click"
+  Style="{StaticResource MaterialDesignFloatingActionMiniSecondaryLightButton}"
+  ToolTip="MaterialDesignFloatingActionMiniSecondaryLightButton"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="464,34,224,35">
+                        <materialDesign:PackIcon
+    Kind="ShowChart"
+     />
+                    </Button>
+
+                    <Border Height="50" Width="150" CornerRadius="20" Grid.Row="1"
+     BorderThickness="5" BorderBrush="DarkGray" Background="#defaf3" Margin="5"/>
+
+                    <Button Content="withdraw money" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="Black" BorderThickness="0" Name="wallet_withdraw_enable" Click="wallet_withdraw_enable_Click"></Button>
+
+                    <Border Height="90" Width="300" CornerRadius="10" Grid.Row="2"
+     BorderThickness="3" BorderBrush="DarkGreen" Background="#defaf3" Margin="214,10,214,9"/>
+                    <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <CheckBox
+    x:Name="MaterialDesignOutlinedTextBoxTextCountComboBox"
+    Content="View Text Input Count" />
+                        <TextBox Name="wallet_card" IsEnabled="False"
+    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+    Height="51"
+    TextWrapping="Wrap"
+    MaxLength="16"
+    materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+    VerticalScrollBarVisibility="Auto"
+    materialDesign:HintAssist.Hint="input card number" Width="280" />
+                    </StackPanel>
+
+                    <Border Height="50" Width="150" CornerRadius="15" Grid.Row="3"
+     BorderThickness="5" BorderBrush="DarkGray" Background="#defaf3" Margin="5"/>
+
+                    <Button Content="withdraw" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Foreground="Black" BorderThickness="0" Name="wallet_withdraw_accept" Click="wallet_withdraw_accept_Click"></Button>
+
+
+
+
+               
+
+
+
+
+                </Grid>
+                
+                
+                
+                
             </TabItem>
 
 
@@ -330,12 +398,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="VIP" Margin="419,0,-156,20" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="20"/>
-                    <ToggleButton Background="#067e99"
+                    <ToggleButton Background="#067e99" Name="add_vipvalue"
   Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
   ToolTip="MaterialDesignSwitchAccentToggleButton"
-  IsChecked="True" Grid.ColumnSpan="2" Margin="186,-24,46,0" />
+  IsChecked="True" Grid.ColumnSpan="2" Margin="186,-24,46,0" Checked="add_vipvalue_Checked" Unchecked="add_vipvalue_Unchecked" />
 
-                    <Button Margin="394,257,51,37" Background="#067e99" Click="creat_book"
+                    <Button Margin="394,257,51,37" Background="#067e99" Click="add_creat_book"
                         Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
   
                         ToolTip="MaterialDesignFloatingActionMiniButton"
@@ -345,6 +413,19 @@
                         Height="20"
                          Width="20" VerticalAlignment="Center" />
                     </Button>
+
+
+
+
+
+                    <!--error-->
+                    <TextBlock Name="add_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,40,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
+
+
+
+
+
+
 
 
                     <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="478,-1,-5,0" Grid.RowSpan="2"/>
@@ -371,7 +452,7 @@
                                 </Grid.RowDefinitions>
                                 <!--مشخصات کاربر-->
                                 <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="0" Grid.Column="1"
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="add_name"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Name"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -380,7 +461,7 @@
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
                                 <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="1" Grid.Column="1"
+                                <TextBox Grid.Row="1" Grid.Column="1" Name="add_writer"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Writer"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -393,7 +474,7 @@
 
 
                                 <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="2" Grid.Column="1"
+                                <TextBox Grid.Row="2" Grid.Column="1" Name="add_printyear"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Print year"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -403,7 +484,7 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
 
                                 <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="3" Grid.Column="1"
+                                <TextBox Grid.Row="3" Grid.Column="1" Name="add_cost"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Cost"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -413,14 +494,14 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
 
                                 <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="4" Grid.Column="1"
+                                <TextBox Grid.Row="4" Grid.Column="1" Name="add_detail"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Detail"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
-                          BorderBrush="{DynamicResource ForeGroundColor}" TextChanged="TextBox_TextChanged"/>
+                          BorderBrush="{DynamicResource ForeGroundColor}" />
 
 
 
@@ -434,7 +515,7 @@
 
 
                                 <materialDesign:PackIcon Grid.Row="5" Grid.Column="0" Kind="Barcode" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="5" Grid.Column="1"
+                                <TextBox Grid.Row="5" Grid.Column="1" Name="add_procode"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="product code"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -442,15 +523,8 @@
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
-                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="1" Grid.Column="1"
-                          Foreground="{DynamicResource ForeGroundColor}"
-                          materialDesign:HintAssist.Hint="Writer"
-                          materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
-                          materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
-                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                          VerticalAlignment="Center"
-                          BorderBrush="{DynamicResource ForeGroundColor}"/>
+
+
 
 
 
@@ -465,7 +539,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <!--دکمه بارگذاری فایل-->
-                                <Button Margin="14,99,193,0" VerticalAlignment="Top"
+                                <Button Margin="14,99,193,0" VerticalAlignment="Top" Click="add_browse"
   Style="{StaticResource MaterialDesignRaisedButton}"
   materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
   Content="browse file" />
@@ -491,6 +565,7 @@
             Text="Edit" />
                     </StackPanel>
                 </TabItem.Header>
+
                 <Grid Background="#dbdbdb">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"/>
@@ -504,7 +579,7 @@
 
                     <!--Buttons-->
                     <!--search-->
-                    <Button Margin="337,17,108,277" Background="#067e99"
+                    <Button Margin="337,17,108,277" Background="#067e99" Name="edit_search" Click="edit_search_Click"
   Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
   
   ToolTip="MaterialDesignFloatingActionMiniButton"
@@ -515,11 +590,12 @@
     Width="20" VerticalAlignment="Center" />
                     </Button>
 
-
-
+                    <!--errors-->
+                    <!--error-->
+                    <TextBlock Name="edit_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,40,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
                     <!--VIP-->
                     <TextBlock Text="VIP" Margin="419,0,-156,20" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="20"/>
-                    <ToggleButton Background="#067e99"
+                    <ToggleButton Background="#067e99" Name="edit_viptoggle" Checked="edit_viptoggle_Checked" Unchecked="edit_viptoggle_Unchecked"     
   Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
   ToolTip="MaterialDesignSwitchAccentToggleButton"
   IsChecked="True" Grid.ColumnSpan="2" Margin="186,-24,46,0" />
@@ -558,7 +634,7 @@
                                 </Grid.RowDefinitions>
                                 <!--مشخصات کاربر-->
                                 <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="1" Grid.Column="1"
+                                <TextBox Grid.Row="1" Grid.Column="1" Name="edit_name"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Name"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -567,7 +643,7 @@
                           VerticalAlignment="Center"
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
                                 <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="2" Grid.Column="1"
+                                <TextBox Grid.Row="2" Grid.Column="1" Name="edit_writer"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Writer"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -580,7 +656,7 @@
 
 
                                 <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="3" Grid.Column="1"
+                                <TextBox Grid.Row="3" Grid.Column="1" Name="edit_printyear"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Print year"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -590,7 +666,7 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
 
                                 <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="4" Grid.Column="1"
+                                <TextBox Grid.Row="4" Grid.Column="1" Name="edit_cost"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Cost"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -600,14 +676,14 @@
                           BorderBrush="{DynamicResource ForeGroundColor}"/>
 
                                 <materialDesign:PackIcon Grid.Row="5" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="5" Grid.Column="1"
+                                <TextBox Grid.Row="5" Grid.Column="1" Name="edit_detail"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Detail"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
                           Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                           VerticalAlignment="Center"
-                          BorderBrush="{DynamicResource ForeGroundColor}" TextChanged="TextBox_TextChanged"/>
+                          BorderBrush="{DynamicResource ForeGroundColor}" />
 
 
 
@@ -621,7 +697,7 @@
 
 
                                 <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Barcode" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="0" Grid.Column="1"
+                                <TextBox Grid.Row="0" Grid.Column="1" Name="edit_procode"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="product code"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -644,17 +720,17 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <!--دکمه بارگذاری فایل-->
-                                <Button Margin="14,99,193,0" VerticalAlignment="Top"
+                                <Button Margin="14,99,193,0" VerticalAlignment="Top" Name="edit_browse" Click="edit_browse_Click"
   Style="{StaticResource MaterialDesignRaisedButton}"
   materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
   Content="browse file" />
                                 <!--دکمه حذف محصول-->
-                                <Button Margin="175,99,32,0" VerticalAlignment="Top"
+                                <Button Margin="175,99,32,0" VerticalAlignment="Top" Name="edit_delete" Click="edit_delete_Click"
   Style="{StaticResource MaterialDesignRaisedButton}"
   materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
   Content="Delete Book " />
                                 <!--Apply-->
-                                <Button Margin="340,99,-133,0" VerticalAlignment="Top"
+                                <Button Margin="340,99,-133,0" VerticalAlignment="Top" Name="edit_apply" Click="edit_apply_Click"
   Style="{StaticResource MaterialDesignRaisedButton}"
   materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
   Content="Apply" />
@@ -706,9 +782,13 @@
 
 
 
+                    <!--error-->
+                    <TextBlock Name="dis_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,70,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
+
+
 
                     <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="478,-1,-5,0" Grid.RowSpan="2"/>
-                    <Image Grid.Row="0" Source="../Images/ShopLogo.png" HorizontalAlignment="Left" Margin="170,-3,0,298" Grid.RowSpan="2" Width="164"/>
+                    <Image Grid.Row="0" Source="../Images/ShopLogo.png" HorizontalAlignment="Left" Margin="170,-31,0,326" Grid.RowSpan="2" Width="164"/>
                     <Border Margin="0,100,0,0" HorizontalAlignment="Left" Grid.RowSpan="2" Width="325">
 
                         <Grid>
@@ -726,9 +806,9 @@
                                     <RowDefinition Height="*"/>
 
                                 </Grid.RowDefinitions>
-                                <!--مشخصات کاربر-->
-                                <materialDesign:PackIcon Grid.Row="0" Kind="Barcode" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="29,29,0,0" Grid.Column="1"/>
-                                <TextBox Grid.Row="0" Grid.Column="1"
+
+                                <materialDesign:PackIcon Grid.Row="0" Kind="Barcode" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="29,29,0,0" Grid.Column="1" />
+                                <TextBox Grid.Row="0" Grid.Column="1"  Name="dis_procode"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Product Code"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -737,7 +817,7 @@
                           VerticalAlignment="Top"
                           BorderBrush="{DynamicResource ForeGroundColor}" Margin="66,16,-66,0"/>
                                 <materialDesign:PackIcon Grid.Row="1" Kind="FountainPenTip" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="29,53,0,0" Grid.Column="1"/>
-                                <TextBox Grid.Row="1" Grid.Column="1"
+                                <TextBox Grid.Row="1" Grid.Column="1" Name="dis_value"
                           Foreground="{DynamicResource ForeGroundColor}"
                           materialDesign:HintAssist.Hint="Discount Value (%)"
                           materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -763,32 +843,32 @@
                                     <RowDefinition Height="*"/>
 
                                 </Grid.RowDefinitions>
-                                <!--دکمه بارگذاری فایل-->
-                                <Button Margin="187,95,20,0" VerticalAlignment="Top"
+
+                                <Button Margin="187,95,20,0" VerticalAlignment="Top" Name="dis_apply" Click="dis_apply_Click"
   Style="{StaticResource MaterialDesignRaisedButton}"
   materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
   Content="Apply" />
 
                                 <!--search-->
-                                <Button HorizontalAlignment="Left" Background="#067e99"
+                                <Button HorizontalAlignment="Left" Background="#067e99" Name="dis_serach" Click="dis_serach_Click"
     Style="{StaticResource MaterialDesignRaisedDarkButton}"
     materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:1" Margin="207,-101,0,236">
                                     Search
                                 </Button>
-                                <ComboBox
+                                <ComboBox Name="dis_time" 
   Style="{StaticResource MaterialDesignFilledComboBox}"
   materialDesign:HintAssist.Hint="Time"
   materialDesign:HintAssist.HelperText="input your time for discount"
-  Width="256" Margin="118,-56,-49,56">
-                                    <ComboBoxItem
-    Content="30 min" />
-                                    <ComboBoxItem
+  Width="256" Margin="118,-56,-49,190">
+                                    <ComboBoxItem Name="dis_30min"
+    Content="30 min"  />
+                                    <ComboBoxItem Name="dis_1hr"
     Content="1 hr" />
-                                    <ComboBoxItem
+                                    <ComboBoxItem Name="dis_2hr"
     Content="2 hr" />
-                                    <ComboBoxItem
+                                    <ComboBoxItem Name="dis_4hr"
     Content="4 hr" />
-                                    <ComboBoxItem
+                                    <ComboBoxItem Name="dis_12hr"
     Content="12 hr" />
                                 </ComboBox>
 
