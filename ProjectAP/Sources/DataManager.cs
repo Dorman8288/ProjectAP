@@ -10,6 +10,8 @@ namespace ProjectAP.Sources
     {
         static List<Account> allAccounts = new List<Account>();
         static List<Product> allProducts = new List<Product>();
+        static List<Product> nonVip = new List<Product>();
+        static List<Product> Vip = new List<Product>();
         public static Account getAccount(string email)
         {
             try
@@ -26,24 +28,26 @@ namespace ProjectAP.Sources
             if (allAccounts.Any(x => input.email == x.email)) throw new Exception("this email is registered");
             allAccounts.Add(input);
         }
+        public static List<Product> getAllProducts()
+        {
+            return allProducts;
+        }
         public static List<Product> getAllNonVipProducts()
         {
-            MessageBox.Show(allProducts.Count().ToString());
-            List<Product> ans = allProducts;
-            foreach (var product in ans)
-            {
-                MessageBox.Show(product.isVip.ToString());
-            }
-            return allProducts.Where(x => x.isVip == false).ToList();
+            return nonVip;
         }
         public static void AddProduct(Product input)
         {
             if (allProducts.Any(x => input.ID == x.ID)) throw new Exception("this ID is registered");
             allProducts.Add(input);
+            if (input.isVip)
+                Vip.Add(input);
+            else
+                nonVip.Add(input);
         }
         public static List<Product> getAllVIPProducts()
         {
-            return allProducts.Where(x => x.isVip == false).ToList();
+            return Vip;
         }
     }
 }

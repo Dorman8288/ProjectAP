@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Background="White">
     <StackPanel>
-        <Button Click="VIP_Buy_Button_Click" Background="MediumSeaGreen" BorderBrush="MediumSeaGreen" Content="Buy VIP" Foreground="{DynamicResource ForeGroundColor}"/>
+        <Button Name="buyButton" Click="VIP_Buy_Button_Click" Background="MediumSeaGreen" BorderBrush="MediumSeaGreen" Content="Buy VIP" Foreground="{DynamicResource ForeGroundColor}"/>
         <DockPanel Margin="10">
             <WrapPanel DockPanel.Dock="Top">
                 <Button Click="Search_Button_Click" Background="Transparent" Foreground="{DynamicResource ForeGroundColor}" BorderThickness="0" Style="{StaticResource MaterialDesignToolButton}">

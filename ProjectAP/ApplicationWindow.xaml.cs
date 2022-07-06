@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Collections.ObjectModel;
+using ProjectAP.Dialogs;
 
 namespace ProjectAP
 {
@@ -21,6 +22,7 @@ namespace ProjectAP
     public partial class ApplicationWindow : Window
     {
         public Customer ActiveAccount;
+        public static bool transactionResult;
         public ApplicationWindow(Customer ActiveAccount)
         {
             InitializeComponent();
@@ -32,7 +34,6 @@ namespace ProjectAP
             InitializeComponent();
             DataManager.AddAccount(new Customer("amdor", "amdor", "dorman8288@gmail.com", "09385017532", "Amdor8288"));
             ActiveAccount = DataManager.getAccount("dorman8288@gmail.com") as Customer;
-            ActiveAccount.AddBalance(123412.543);
             CustomerChip.Icon = char.ToUpper(ActiveAccount.name[0]);
             CustomerChip.Content = ActiveAccount.name + ' ' + ActiveAccount.familyName;
             BalanceDisplay.Text = ActiveAccount.balance.ToString();
@@ -40,6 +41,9 @@ namespace ProjectAP
             Customer_Pages.InventoryPage.ActiveAccount = ActiveAccount;
             Customer_Pages.CartPage.ActiveAccount = ActiveAccount;
             Customer_Pages.VipPage.ActiveAccount = ActiveAccount;
+            Customer_Pages.SettingsPage.ActiveAccount = ActiveAccount;
+            Customer_Pages.ProductDisplayer.ActiveAccount = ActiveAccount;
+            BalanceDisplay.DataContext = ActiveAccount;
             try
             {
                 DataManager.AddAccount(new Admin("Admin", "Admin", "Admin@gmail.com", "09385017532", "Admin1234"));    
@@ -90,12 +94,23 @@ namespace ProjectAP
 
         private void Wallet_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("hello");
+            ChargeWalletDialog dialog = new ChargeWalletDialog(ActiveAccount);
+            dialog.ShowDialog();
         }
 
         private void Vip_Button_Click(object sender, RoutedEventArgs e)
         {
             PageNavigator.SelectedIndex = 5;
+            if (ActiveAccount.HaveVip())
+            {
+                Vip.buyButton.IsEnabled = false;
+                Vip.buyButton.Content = $"You have VIP until {ActiveAccount.VIPExpieringDate}";
+            }
+            else
+            {
+                Vip.buyButton.IsEnabled = true;
+                Vip.buyButton.Content = $"Buy VIP";
+            }
         }
     }
 }

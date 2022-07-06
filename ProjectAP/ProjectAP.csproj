@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\4406340.jpg" />
+    <None Remove="Images\images.jpg" />
     <None Remove="Resources\FinalProject.pdf" />
     <None Remove="Images\ShopLogo.png" />
     <None Remove="Resources\TestImage1.jpg" />
@@ -16,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dialogs\" />
     <Folder Include="NewFolder\" />
   </ItemGroup>
 
@@ -25,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\4406340.jpg" />
+    <Resource Include="Images\images.jpg" />
     <Resource Include="Resources\FinalProject.pdf" />
     <Resource Include="Images\ShopLogo.png" />
     <Resource Include="Resources\TestImage1.jpg" />

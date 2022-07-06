@@ -42,6 +42,7 @@
             </Border.Background>
         </Border>
         <ToggleButton Name="bookmarkToggle"
+                      Loaded="bookmarkToggle_Loaded"
                       Unchecked="bookmarkToggle_Unchecked" Checked="BookMarkButton_Checked" Grid.Row="5"
                       Foreground="{DynamicResource ForeGroundColor}"
                       Background="MediumSeaGreen"
@@ -65,5 +66,10 @@
                 <TextBlock VerticalAlignment="Center" Text="{Binding price}"/>
             </WrapPanel>
         </Button>
+        <materialDesign:RatingBar Grid.Row="4" Grid.Column="1"
+                              IsEnabled="False"
+                              x:Name="BasicRatingBar"
+                              Value="0"
+                              ValueChanged="BasicRatingBar_ValueChanged" />
     </Grid>
 </UserControl>
