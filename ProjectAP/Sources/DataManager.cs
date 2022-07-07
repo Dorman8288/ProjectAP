@@ -94,6 +94,7 @@ namespace ProjectAP.Sources
                 Initialize();
                 SaveCustomers();
                 SaveProducts();
+                SaveRelations();
             }
             catch (SqlException e)
             {
@@ -101,6 +102,27 @@ namespace ProjectAP.Sources
             }
         }
         public static void SaveCustomers()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("INSERT Customers (Email, Inventory, Cart, Bookmark) ");
+            sb.Append("VALUES (@email, @inventory, @cart, @bookmark);");
+            sql = sb.ToString();
+            command = new SqlCommand(sql, connection);
+            foreach (var account in allAccounts)
+            {
+                if (account is Customer)
+                {
+                    Customer customer = account as Customer;
+                    command.Parameters.AddWithValue("@email", customer.email);
+                    command.Parameters.AddWithValue("@inventory", customer.name);
+                    command.Parameters.AddWithValue("@cart", customer.familyName);
+                    command.Parameters.AddWithValue("@bookmark", customer.phoneNumber);
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+                }
+            }
+        }
+        public static void SaveRelations()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("INSERT Customers (Email, FirstName, LastName, PhoneNumber, Password, Balance, TotalSell, VipExpiringDate) ");
