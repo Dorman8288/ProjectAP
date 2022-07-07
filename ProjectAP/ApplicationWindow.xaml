@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjectAP.Customer_Pages"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="ApplicationWindow" Height="450" Width="830"
+        Title="store"  Height="450" Width="830"
         WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
