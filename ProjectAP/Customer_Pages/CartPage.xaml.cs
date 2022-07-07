@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using System.Linq;
 using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
+using ProjectAP.Dialogs;
 
 namespace ProjectAP.Customer_Pages
 {
@@ -41,11 +42,16 @@ namespace ProjectAP.Customer_Pages
 
         private void Buy_Button_Click(object sender, RoutedEventArgs e)
         {
-            List<Product> newList = CartDisplayer.ItemsSource.Cast<Product>().ToList();
-            ActiveAccount.inventory.AddRange(newList);
-            ActiveAccount.cart.Reset();
-            CartDisplayer.ItemsSource = ActiveAccount.cart.allProducts;
-            BuyButton.Text = ActiveAccount.cart.CalculatePrice().ToString();
+            transaction_Dialog dialog = new transaction_Dialog(ActiveAccount.cart.CalculatePrice(), ActiveAccount);
+            dialog.ShowDialog();
+            if (dialog.transactionResult)
+            {
+                List<Product> newList = CartDisplayer.ItemsSource.Cast<Product>().ToList();
+                ActiveAccount.inventory.AddRange(newList);
+                ActiveAccount.cart.Reset();
+                CartDisplayer.ItemsSource = ActiveAccount.cart.allProducts;
+                BuyButton.Text = ActiveAccount.cart.CalculatePrice().ToString();
+            }
         }
     }
 }

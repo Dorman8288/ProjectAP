@@ -15,6 +15,7 @@
             </Button>
             <TextBox Name="NameSearchBox" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}" materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}" Width="100" materialDesign:HintAssist.Hint="Name" Margin="10"/>
             <TextBox Name="AuthorSearchBox" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}" materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}" Width="100" materialDesign:HintAssist.Hint="Author" Margin="10"/>
+            <CheckBox Content="Bookmark" Name="BookMarkCheckBox"/>
         </WrapPanel>
         <ScrollViewer DockPanel.Dock="Bottom">
             <ItemsControl Name="Displayer">

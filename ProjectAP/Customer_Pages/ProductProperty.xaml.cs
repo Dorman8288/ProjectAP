@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using ProjectAP.Sources;
 using ProjectAP.Sources.Accounts;
 using System.Linq;
+using ProjectAP.Dialogs;
 
 namespace ProjectAP.Customer_Pages
 {
@@ -40,7 +41,6 @@ namespace ProjectAP.Customer_Pages
                 }
             }
             BuyButtonText.Text = "Add to Cart";
-            bookmarkToggle.IsChecked = false;
         }
 
         private void Add_To_Cart_Button_Click(object sender, RoutedEventArgs e)
@@ -61,6 +61,7 @@ namespace ProjectAP.Customer_Pages
             {
                 bookmarkToggle.IsChecked = true;
             }
+            MessageBox.Show(ActiveAccount.bookMarks.Count.ToString());
         }
 
         private void bookmarkToggle_Unchecked(object sender, RoutedEventArgs e)
@@ -75,7 +76,17 @@ namespace ProjectAP.Customer_Pages
 
         private void Buy_Button_Click(object sender, RoutedEventArgs e)
         {
-            ActiveAccount.inventory.Add(DataContext as Product);
+            transaction_Dialog dialog = new transaction_Dialog((DataContext as Product).CalculatePrice(), ActiveAccount);
+            dialog.ShowDialog();
+            if (dialog.transactionResult)
+            {
+                ActiveAccount.inventory.Add(DataContext as Product);
+            }
+        }
+
+        private void BasicRatingBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<int> e)
+        {
+            (DataContext as Product).addRating(BasicRatingBar.Value);
         }
     }
 }

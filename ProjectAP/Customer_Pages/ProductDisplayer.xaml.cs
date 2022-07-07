@@ -22,15 +22,18 @@ namespace ProjectAP.Customer_Pages
     /// </summary>
     public partial class ProductDisplayer : UserControl
     {
+        List<Product> nonVipProducts;
+        public static Customer ActiveAccount;
         public ProductDisplayer()
         {
             InitializeComponent();
-            MessageBox.Show(DataManager.getAllNonVipProducts().Count().ToString());
-            Displayer.ItemsSource = DataManager.getAllNonVipProducts();
+            nonVipProducts = DataManager.getAllNonVipProducts();
+            Displayer.ItemsSource = nonVipProducts;
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
-            Displayer.ItemsSource = Displayer.ItemsSource.Cast<Product>().Where(x => Regex.IsMatch(x.name, @"^.*" + NameSearchBox.Text + @".*$") && Regex.IsMatch(x.author, @"^.*" + AuthorSearchBox.Text + @".*$"));
+            MessageBox.Show(ActiveAccount.bookMarks.Count.ToString());
+            Displayer.ItemsSource = Displayer.ItemsSource.Cast<Product>().Where(x => Regex.IsMatch(x.name, @"^.*" + NameSearchBox.Text + @".*$") && Regex.IsMatch(x.author, @"^.*" + AuthorSearchBox.Text + @".*$") && ActiveAccount.bookMarks.Contains(x) == BookMarkCheckBox.IsChecked);
         }
 
         private void Select_Book_Button_Click(object sender, RoutedEventArgs e)
@@ -39,8 +42,19 @@ namespace ProjectAP.Customer_Pages
             {
                 if (window.GetType() == typeof(ApplicationWindow))
                 {
-                    (window as ApplicationWindow).PageNavigator.SelectedIndex = 4;
-                    (window as ApplicationWindow).Property.DataContext = (sender as Button).DataContext as Product;
+                    ApplicationWindow appWindow = window as ApplicationWindow;
+                    Product product = (sender as Button).DataContext as Product;
+                    appWindow.PageNavigator.SelectedIndex = 4;
+                    appWindow.Property.DataContext = product;
+                    if (appWindow.ActiveAccount.inventory.Contains(product))
+                    {
+                        appWindow.Property.BasicRatingBar.IsEnabled = true;
+                    }
+                    else
+                    {
+                        appWindow.Property.BasicRatingBar.IsEnabled = false;
+                        appWindow.Property.BasicRatingBar.Value = 0;
+                    }
                 }
             }
         }
