@@ -177,7 +177,7 @@ namespace ProjectAP.Sources
         {
             LoadCustomers();
             LoadProducts();
-            //LoadRelations();
+            LoadRelations();
             connection.Close();
         }
         public static void LoadCustomers()
@@ -212,6 +212,25 @@ namespace ProjectAP.Sources
                         Product newProduct = new Product(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(4), reader.GetString(2), reader.GetString(9), reader.GetInt32(5), reader.GetString(3), reader.GetString(8), reader.GetBoolean(7));
                         AddProduct(newProduct);
                         newProduct.numOfRatings = reader.GetInt32(6);
+                    }
+                }
+            }
+            connection.Close();
+        }
+        public static void LoadRelations()
+        {
+            sql = "USE ProjectAP; SELECT Email, Inventory, Cart, Bookmarks FROM Container;";
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Customer account = getAccount(reader.GetString(0)) as Customer;
+                        account.StringToInventory(reader.GetString(1));
+                        account.StringToCart(reader.GetString(2));
+                        account.StringToBookmarks(reader.GetString(3));
                     }
                 }
             }

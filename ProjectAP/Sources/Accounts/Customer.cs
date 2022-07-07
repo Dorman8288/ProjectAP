@@ -76,5 +76,41 @@ namespace ProjectAP.Sources.Accounts
             }
             return ans;
         }
+        public void StringToBookmarks(string input)
+        {
+            string[] temp = input.Split(',');
+            foreach (var item in temp)
+            {
+                if(item != "")
+                {
+                    Product product = DataManager.getAllProducts().Find(x => x.ID == int.Parse(item));
+                    bookMarks.Add(product);
+                }
+            }
+        }
+        public void StringToInventory(string input)
+        {
+            string[] temp = input.Split(',');
+            foreach (var item in temp)
+            {
+                if (item != "")
+                {
+                    Product product = DataManager.getAllProducts().Find(x => x.ID == int.Parse(item));
+                    inventory.Add(product);
+                }
+            }
+        }
+        public void StringToCart(string input)
+        {
+            string[] temp = input.Split(',');
+            foreach (var item in temp)
+            {
+                if (item != "")
+                {
+                    Product product = DataManager.getAllProducts().Find(x => x.ID == int.Parse(item));
+                    cart.allProducts.Add(product);
+                }
+            }
+        }
     }
 }

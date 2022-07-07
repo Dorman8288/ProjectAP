@@ -9,7 +9,8 @@
         Height="500" Width="350" 
         Background="{DynamicResource PrimaryColor}"
         Name="Authorization_Window"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Closed="Authorization_Window_Closed">
     <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
         <materialDesign:Transitioner.InputBindings>
             <KeyBinding
