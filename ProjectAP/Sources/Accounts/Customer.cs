@@ -54,8 +54,27 @@ namespace ProjectAP.Sources.Accounts
             string ans = "";
             foreach(var item in bookMarks)
             {
-
+                ans += item.ID + ",";
             }
+            return ans;
+        }
+        public string InventoryToString()
+        {
+            string ans = "";
+            foreach (var item in inventory)
+            {
+                ans += item.ID + ",";
+            }
+            return ans;
+        }
+        public string CartToString()
+        {
+            string ans = "";
+            foreach (var item in cart.allProducts)
+            {
+                ans += item.ID + ",";
+            }
+            return ans;
         }
     }
 }
