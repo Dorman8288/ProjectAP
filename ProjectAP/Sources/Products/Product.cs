@@ -10,7 +10,7 @@ namespace ProjectAP.Sources
         string _name;
         public int ID { get; }
         int _rating;
-        int numOfRatings = 0;
+        public int numOfRatings = 0;
         double _price;
         string _description;
         public string filePath { get; }

@@ -49,5 +49,13 @@ namespace ProjectAP.Sources.Accounts
             inventory.AddRange(cart.allProducts);
             cart.Reset();
         }
+        public string BookmarkToString()
+        {
+            string ans = "";
+            foreach(var item in bookMarks)
+            {
+
+            }
+        }
     }
 }

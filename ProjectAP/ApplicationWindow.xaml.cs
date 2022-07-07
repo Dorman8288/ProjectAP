@@ -56,6 +56,7 @@ namespace ProjectAP
             {
 
             }
+            DataManager.Save();
         }
 
         private void Store_Button_Click(object sender, RoutedEventArgs e)

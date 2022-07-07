@@ -42,7 +42,6 @@
             </Border.Background>
         </Border>
         <ToggleButton Name="bookmarkToggle"
-                      Loaded="bookmarkToggle_Loaded"
                       Unchecked="bookmarkToggle_Unchecked" Checked="BookMarkButton_Checked" Grid.Row="5"
                       Foreground="{DynamicResource ForeGroundColor}"
                       Background="MediumSeaGreen"
