@@ -13,6 +13,8 @@ using ProjectAP.Sources.Accounts;
 using ProjectAP.Sources;
 
 
+
+
 namespace ProjectAP.admin_section_develop
 {
    
@@ -59,37 +61,88 @@ namespace ProjectAP.admin_section_develop
         //load other info from database
 
         //add
+        
 
+
+
+        //path and vip
         bool add_vip_value = false;
+        string add_filepath = "";
+        string add_imagepath = "";
         private void add_creat_book(object sender, RoutedEventArgs e)
         {
-            bool vip = add_vip_value;
-            string name = add_name.Text;
-            string writer = add_writer.Text;
-            string detail = add_detail.Text;
-            int print_year;
-            double cost;
-            int code;
-
-
-            try
+            if((add_name.Text==null) ||(add_writer.Text==null) ||(add_detail.Text==null) ||(add_printyear.Text==null) ||(add_cost.Text==null) ||(add_procode.Text==null)||(add_filepath==null) ||(add_imagepath==null))
             {
-                print_year = int.Parse(add_printyear.Text);
-                cost = double.Parse(add_cost.Text);
-
-                code = int.Parse(add_procode.Text);
-            }
-            catch
-            {
-                add_errors.Text = "input number";
+                add_errors.Text = "empty field!";
                 add_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
             }
-             
+            else
+            {
+                bool vip = add_vip_value;
+                string name = add_name.Text;
+                string writer = add_writer.Text;
+                string detail = add_detail.Text;
+                int print_year;
+                double cost = 0;
+                int code = 0;
+
+
+                try
+                {
+                    print_year = int.Parse(add_printyear.Text);
+                    cost = double.Parse(add_cost.Text);
+
+                    code = int.Parse(add_procode.Text);
+                }
+                catch
+                {
+                    add_errors.Text = "input number";
+                    add_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
+                }
+                Product first;
+                if (cost != 0 && code != 0)
+                {
+                    first = new Product(name, code, cost, detail, add_filepath, 5, writer, add_imagepath, vip);
+                    DataManager.AddProduct(first);
+                    add_errors.Text = "seccusfull!";
+                }
+            }
+            
+            
+
+
         }
        
 
         private void add_browse(object sender, RoutedEventArgs e)
         {
+            //OpenFileDialog fdlg = new OpenFileDialog();
+            //fdlg.Title = "C# Corner Open File Dialog";
+            //fdlg.InitialDirectory = @"c:\";
+            //fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+            //fdlg.FilterIndex = 2;
+            //fdlg.RestoreDirectory = true;
+            //if (fdlg.ShowDialog() == DialogResult.OK)
+            //{
+               
+            //}
+            //amir
+            //browse file from explorer
+        }
+
+
+        private void add_imagebrowse_Click(object sender, RoutedEventArgs e)
+        {
+            //OpenFileDialog fdlg = new OpenFileDialog();
+            //fdlg.Title = "C# Corner Open File Dialog";
+            //fdlg.InitialDirectory = @"c:\";
+            //fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+            //fdlg.FilterIndex = 2;
+            //fdlg.RestoreDirectory = true;
+            //if (fdlg.ShowDialog() == DialogResult.OK)
+            //{
+
+            //}
             //amir
             //browse file from explorer
         }
@@ -109,8 +162,40 @@ namespace ProjectAP.admin_section_develop
 
 
         //edit
+
+
+
+        //path
+        string edit_filepath = "";
+        string edit_imagepath = "";
         private void edit_browse_Click(object sender, RoutedEventArgs e)
         {
+            //OpenFileDialog fdlg = new OpenFileDialog();
+            //fdlg.Title = "C# Corner Open File Dialog";
+            //fdlg.InitialDirectory = @"c:\";
+            //fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+            //fdlg.FilterIndex = 2;
+            //fdlg.RestoreDirectory = true;
+            //if (fdlg.ShowDialog() == DialogResult.OK)
+            //{
+
+            //}
+            //amir
+            //browse file from explorer
+        }
+
+        private void edit_browseimage_Click(object sender, RoutedEventArgs e)
+        {
+            //OpenFileDialog fdlg = new OpenFileDialog();
+            //fdlg.Title = "C# Corner Open File Dialog";
+            //fdlg.InitialDirectory = @"c:\";
+            //fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+            //fdlg.FilterIndex = 2;
+            //fdlg.RestoreDirectory = true;
+            //if (fdlg.ShowDialog() == DialogResult.OK)
+            //{
+
+            //}
             //amir
             //browse file from explorer
         }
@@ -267,5 +352,7 @@ namespace ProjectAP.admin_section_develop
             wallet_value.Text = "6546$";
             // amir load this from data base
         }
+
+      
     }
 }
