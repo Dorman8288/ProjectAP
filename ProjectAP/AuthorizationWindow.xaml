@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectAP.page"
         mc:Ignorable="d"
-        Title="AuthorizationWindow" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Height="500" Width="350"
+        Title="Login" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Height="500" Width="350" 
         Background="{DynamicResource PrimaryColor}"
         Name="Authorization_Window"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Closed="Authorization_Window_Closed">
     <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
         <materialDesign:Transitioner.InputBindings>
             <KeyBinding

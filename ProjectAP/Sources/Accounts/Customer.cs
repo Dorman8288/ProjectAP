@@ -54,7 +54,62 @@ namespace ProjectAP.Sources.Accounts
             string ans = "";
             foreach(var item in bookMarks)
             {
-
+                ans += item.ID + ",";
+            }
+            return ans;
+        }
+        public string InventoryToString()
+        {
+            string ans = "";
+            foreach (var item in inventory)
+            {
+                ans += item.ID + ",";
+            }
+            return ans;
+        }
+        public string CartToString()
+        {
+            string ans = "";
+            foreach (var item in cart.allProducts)
+            {
+                ans += item.ID + ",";
+            }
+            return ans;
+        }
+        public void StringToBookmarks(string input)
+        {
+            string[] temp = input.Split(',');
+            foreach (var item in temp)
+            {
+                if(item != "")
+                {
+                    Product product = DataManager.getAllProducts().Find(x => x.ID == int.Parse(item));
+                    bookMarks.Add(product);
+                }
+            }
+        }
+        public void StringToInventory(string input)
+        {
+            string[] temp = input.Split(',');
+            foreach (var item in temp)
+            {
+                if (item != "")
+                {
+                    Product product = DataManager.getAllProducts().Find(x => x.ID == int.Parse(item));
+                    inventory.Add(product);
+                }
+            }
+        }
+        public void StringToCart(string input)
+        {
+            string[] temp = input.Split(',');
+            foreach (var item in temp)
+            {
+                if (item != "")
+                {
+                    Product product = DataManager.getAllProducts().Find(x => x.ID == int.Parse(item));
+                    cart.allProducts.Add(product);
+                }
             }
         }
     }

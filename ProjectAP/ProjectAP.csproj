@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="Images\4406340.jpg" />
     <None Remove="Images\images.jpg" />
+    <None Remove="Images\logo.ico" />
     <None Remove="Resources\FinalProject.pdf" />
     <None Remove="Images\ShopLogo.png" />
     <None Remove="Resources\TestImage1.jpg" />
@@ -29,6 +30,7 @@
   <ItemGroup>
     <Resource Include="Images\4406340.jpg" />
     <Resource Include="Images\images.jpg" />
+    <Resource Include="Images\logo.ico" />
     <Resource Include="Resources\FinalProject.pdf" />
     <Resource Include="Images\ShopLogo.png" />
     <Resource Include="Resources\TestImage1.jpg" />
