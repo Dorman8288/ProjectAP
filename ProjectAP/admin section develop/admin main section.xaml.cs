@@ -11,9 +11,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ProjectAP.Sources.Accounts;
 using ProjectAP.Sources;
-
-
-
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.IO;
 
 namespace ProjectAP.admin_section_develop
 {
@@ -21,13 +23,19 @@ namespace ProjectAP.admin_section_develop
     public partial class admin_main_section : Window
     {
         Admin ActiveAccount;
+        ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
         public admin_main_section(Admin ActiveAccount)
         {
             InitializeComponent();
             this.ActiveAccount = ActiveAccount;
+            DataManager.GetAllCustomers().ForEach(x => customers.Add(x));
+;            customerDataGrid.ItemsSource = customers;
         }
 
-
+        private void Search_Button_Click(object sender, RoutedEventArgs e)
+        {
+            customerDataGrid.ItemsSource = customerDataGrid.ItemsSource.Cast<Customer>().Where(x => Regex.IsMatch(x.email, @"^.*" + EmailSearchBox.Text + @".*$") && Regex.IsMatch(x.name, @"^.*" + FirstNameSearchBox.Text + @".*$"));
+        }
 
 
 
@@ -42,11 +50,14 @@ namespace ProjectAP.admin_section_develop
             try
             {
                 value = double.Parse(VIP_value_account.Text);
+                Admin.VipAmount = value;
+                account_setting_errors.Text = "Successful";
+                account_setting_errors.Foreground = new SolidColorBrush(Colors.Green);
             }
             catch
             {
                 account_setting_errors.Text = "input digit";
-                account_setting_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
+                account_setting_errors.Foreground = new SolidColorBrush(Colors.DarkRed);
             }
         }
 
@@ -71,80 +82,68 @@ namespace ProjectAP.admin_section_develop
         string add_imagepath = "";
         private void add_creat_book(object sender, RoutedEventArgs e)
         {
-            if((add_name.Text==null) ||(add_writer.Text==null) ||(add_detail.Text==null) ||(add_printyear.Text==null) ||(add_cost.Text==null) ||(add_procode.Text==null)||(add_filepath==null) ||(add_imagepath==null))
+            try
             {
-                add_errors.Text = "empty field!";
-                add_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
-            }
-            else
-            {
-                bool vip = add_vip_value;
-                string name = add_name.Text;
-                string writer = add_writer.Text;
-                string detail = add_detail.Text;
-                int print_year;
-                double cost = 0;
-                int code = 0;
-
-
-                try
+                if ((add_name.Text == null) || (add_writer.Text == null) || (add_detail.Text == null) || (add_printyear.Text == null) || (add_cost.Text == null) || (add_procode.Text == null) || (add_filepath == null) || (add_imagepath == null))
                 {
+                    add_errors.Text = "empty field!";
+                    add_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
+                }
+                else
+                {
+                    bool vip = add_vip_value;
+                    string name = add_name.Text;
+                    string writer = add_writer.Text;
+                    string detail = add_detail.Text;
+                    int print_year;
+                    double cost = 0;
+                    int code = 0;
+
                     print_year = int.Parse(add_printyear.Text);
                     cost = double.Parse(add_cost.Text);
 
                     code = int.Parse(add_procode.Text);
-                }
-                catch
-                {
-                    add_errors.Text = "input number";
-                    add_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
-                }
-                Product first;
-                if (cost != 0 && code != 0)
-                {
-                    first = new Product(name, code, cost, detail, add_filepath, 5, writer, add_imagepath, vip);
-                    DataManager.AddProduct(first);
-                    add_errors.Text = "seccusfull!";
+                    if (add_filepath == "" || add_imagepath == "") throw new Exception("please select files");
+                    Product first;
+                    if (cost != 0 && code != 0)
+                    {
+                        first = new Product(name, code, cost, detail, add_filepath, 5, writer, add_imagepath, vip);
+                        DataManager.AddProduct(first);
+                        add_errors.Foreground = new SolidColorBrush(Colors.Green);
+                        add_errors.Text = "seccusfull!";
+                    }
                 }
             }
-            
-            
-
-
-        }
-       
+            catch (Exception error)
+            {
+                add_errors.Text = error.Message;
+                add_errors.Foreground = new SolidColorBrush(Colors.DarkRed);
+            }
+        }   
 
         private void add_browse(object sender, RoutedEventArgs e)
         {
-            //OpenFileDialog fdlg = new OpenFileDialog();
-            //fdlg.Title = "C# Corner Open File Dialog";
-            //fdlg.InitialDirectory = @"c:\";
-            //fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
-            //fdlg.FilterIndex = 2;
-            //fdlg.RestoreDirectory = true;
-            //if (fdlg.ShowDialog() == DialogResult.OK)
-            //{
-               
-            //}
-            //amir
-            //browse file from explorer
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "PDF files (*.pdf)|*.pdf";
+            if (dialog.ShowDialog() == true)
+            {
+                string extention = System.IO.Path.GetExtension(dialog.FileName);
+                File.Copy(dialog.FileName, @"../../../Resources/" + add_procode.Text + extention, true);
+                add_filepath = @"..\..\..\Resources\" + add_procode.Text  + extention;
+            }
         }
 
 
         private void add_imagebrowse_Click(object sender, RoutedEventArgs e)
         {
-            //OpenFileDialog fdlg = new OpenFileDialog();
-            //fdlg.Title = "C# Corner Open File Dialog";
-            //fdlg.InitialDirectory = @"c:\";
-            //fdlg.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
-            //fdlg.FilterIndex = 2;
-            //fdlg.RestoreDirectory = true;
-            //if (fdlg.ShowDialog() == DialogResult.OK)
-            //{
-
-            //}
-            //amir
-            //browse file from explorer
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg";
+            if (dialog.ShowDialog() == true)
+            {
+                string extention = System.IO.Path.GetExtension(dialog.FileName);
+                File.Copy(dialog.FileName, @"../../../Resources/" + add_procode.Text + extention, true);
+                add_imagepath = @"..\..\..\Resources\" + add_procode.Text + extention;
+            }
         }
 
         private void add_vipvalue_Checked(object sender, RoutedEventArgs e)
@@ -202,65 +201,49 @@ namespace ProjectAP.admin_section_develop
 
         private void edit_delete_Click(object sender, RoutedEventArgs e)
         {
-            
-            if((edit_detail.Text==null)|| (edit_name.Text==null)|| (edit_cost.Text==null)|| (edit_writer.Text==null)|| (edit_printyear.Text==null)|| (edit_procode.Text==null))
+            try
             {
-                edit_errors.Text = "one or several fields is empty";
-                edit_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
+                if (edit_procode.Text == "")
+                    throw new Exception("you should enter product code first");
+                Product product = DataManager.getAllProducts().Single(x => x.ID == int.Parse(edit_procode.Text));
+                DataManager.getAllProducts().Remove(product);
+                edit_errors.Text = "successful";
+                edit_errors.Foreground = new SolidColorBrush(Colors.Green);
             }
-            else
+            catch(Exception error)
             {
-                //amir
-                // delete book with 
+                edit_errors.Text = error.Message;
+                edit_errors.Foreground = new SolidColorBrush(Colors.DarkRed);
             }
         }
-
+        bool edit_vip = false;
         private void edit_apply_Click(object sender, RoutedEventArgs e)
         {
-            if ((edit_detail.Text == null) || (edit_name.Text == null) || (edit_cost.Text == null) || (edit_writer.Text == null) || (edit_printyear.Text == null) || (edit_procode.Text == null))
+            try
             {
-                edit_errors.Text = "one or several fields is empty";
-                edit_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
-            }
-            else
-            {
-                //amir
-                // edit book with
-            }
+                if (edit_procode.Text == "")
+                    throw new Exception("you should enter product code first");
+                Product product = DataManager.getAllProducts().Single(x => x.ID == int.Parse(edit_procode.Text));
 
-            //bookname=edit_name.Text ;
-            //bookwriter=edit_writer.Text ;
-            //bookcost= edit_cost.Text ;
-            //bookdetail=edit_detail.Text ;
-            //bookyear=edit_printyear.Text ;
-            //bookcode=edit_procode.Text ;
-            //bookvip=edit_viptoggle ;
+                if (edit_name.Text != "")
+                    product.name = edit_name.Text;
+                if (edit_writer.Text != "")
+                    product.author = edit_writer.Text;
+                if (edit_cost.Text != "")
+                    product.price = double.Parse(edit_cost.Text);
+                if (edit_detail.Text != "")
+                    product.description = edit_detail.Text;
+                product.isVip = edit_vip;
 
+                edit_errors.Text = "successful";
+                edit_errors.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            catch(Exception error) 
+            { 
+                edit_errors.Text = error.Message;
+                edit_errors.Foreground = new SolidColorBrush(Colors.DarkRed);
+            }
         }
-        bool edit_vip =false;
-        private void edit_search_Click(object sender, RoutedEventArgs e)
-        {
-            if(edit_procode==null)
-            {
-                edit_errors.Text = "first search code";
-                edit_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
-            }
-            else
-            {
-                //امیر اینجا باید فیلد های محصول از دیتا بیس لود بشه
-                //بعدش ادمین میتونه تغییرات مورد نظرش رو انجام بده و در آخر اپلای رو بزنه
-                //edit_name.Text = "";
-                //edit_writer.Text = "";
-                //edit_cost.Text = "";
-                //edit_detail.Text = "";
-                //edit_printyear.Text = "";
-                //edit_procode.Text = "";
-               // edit_viptoggle = checked;
-            }
-            
-
-        }
-
         private void edit_viptoggle_Checked(object sender, RoutedEventArgs e)
         {
             //amir
@@ -353,6 +336,11 @@ namespace ProjectAP.admin_section_develop
             // amir load this from data base
         }
 
-      
+        private void Back_Button_Click(object sender, RoutedEventArgs e)
+        {
+            AuthorizationWindow window = new AuthorizationWindow();
+            window.Show();
+            Close();
+        }
     }
 }

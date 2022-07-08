@@ -10,7 +10,6 @@
         Background="{DynamicResource PrimaryColor}"
         Name="Authorization_Window"
         WindowStartupLocation="CenterScreen"
-        Closed="Authorization_Window_Closed"
         Icon="Images/favicon.ico">
     <materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
         <materialDesign:Transitioner.InputBindings>

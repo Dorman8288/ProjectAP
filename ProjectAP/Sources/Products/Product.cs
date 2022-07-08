@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using System.Windows.Media.Imaging;
 
 namespace ProjectAP.Sources
 {
@@ -17,19 +18,20 @@ namespace ProjectAP.Sources
         double _discount = 0;
         double _totalSell;
         string _author;
+        BitmapImage image;
         public string imagePath { get; }
-        public bool isVip { get; } = false;
+        public bool isVip { get; set; } = false;
         public string author
         {
             get { return _author; }
-            private set { if (value == "") throw new Exception("Product name cannot be empty"); else _author = value; }
+            set { if (value == "") throw new Exception("Product name cannot be empty"); else _author = value; }
         }
         public double discount
         {
             get { return _discount; }
             set
             {
-                if (!(0 < value && value <= 1)) throw new Exception("discount amount is invalid");
+                if (!(0 <= value && value <= 1)) throw new Exception("discount amount is invalid");
                 else
                 {
                     _discount = value;
@@ -39,17 +41,17 @@ namespace ProjectAP.Sources
         public string name
         {
             get { return _name; }
-            private set { if (value == "") throw new Exception("Product name cannot be empty"); else _name = value; }
+            set { if (value == "") throw new Exception("Product name cannot be empty"); else _name = value; }
         }
         public int rating 
         {
             get { return _rating; }
-            private set { if (!(0 <= value && value <= 5)) throw new Exception("Rating should be between 0 and 5"); else _rating = value; }
+            set { if (!(0 <= value && value <= 5)) throw new Exception("Rating should be between 0 and 5"); else _rating = value; }
         }
         public double price
         {
             get { return _price; }
-            private set { if (value < 0) throw new Exception("Price should be Positive"); else _price = value; }
+            set { if (value < 0) throw new Exception("Price should be Positive"); else _price = value; }
         }
         public double totalSell
         {
@@ -59,7 +61,7 @@ namespace ProjectAP.Sources
         public string description
         {
             get { return _description; }
-            private set { if (value == "") throw new Exception("Product name cannot be empty"); else _description = value; }
+            set { if (value == "") throw new Exception("Product name cannot be empty"); else _description = value; }
         }
         public void AddDiscount(int value)
         {
@@ -75,6 +77,7 @@ namespace ProjectAP.Sources
             this.rating = rating;
             this.author = author;
             this.imagePath = imagePath;
+            image = new BitmapImage(new Uri(imagePath, UriKind.Relative));
             this.isVip = isVip;
         }
         public double CalculatePrice()

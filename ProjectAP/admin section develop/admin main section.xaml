@@ -9,11 +9,17 @@
         Title="Admin" Height="450" Width="800"
         WindowStartupLocation="CenterScreen"
         Icon="../Images/favicon.ico">
-    <materialDesign:Card>
+    <StackPanel>
+        <Button  Click="Back_Button_Click">
+            <WrapPanel VerticalAlignment="Center">
+                <materialDesign:PackIcon VerticalAlignment="Center" Kind="ArrowLeft"/>
+                <TextBlock VerticalAlignment="Center" Text="Back"/>
+            </WrapPanel>
+        </Button>
         <TabControl
-    VerticalContentAlignment="Top"
-    materialDesign:ColorZoneAssist.Mode="Inverted"
-    Style="{StaticResource MaterialDesignNavigationRailTabControl}" TabStripPlacement="Right">
+                VerticalContentAlignment="Top"
+                materialDesign:ColorZoneAssist.Mode="Inverted"
+                Style="{StaticResource MaterialDesignNavigationRailTabControl}" TabStripPlacement="Right" Height="403">
 
 
 
@@ -41,43 +47,63 @@
                          Style="{StaticResource MaterialDesignFilledTabControl}">
                         <TabItem 
                             Header="VIP setting">
-                            <Grid Width="725" >
+                            <Grid Margin="0,0,0,4" >
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="512*"/>
-                                    <ColumnDefinition Width="213*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="1.5*"/>
                                 </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
                                 <!--error-->
-                                <TextBlock Name="account_setting_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,40,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Name="account_setting_errors" Text="No Errors !" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="15"></TextBlock>
                                 <!--image-->
-                                <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="0,0,-513,0" />
-                                
-                                <Grid Grid.Column="0">
-                                    <materialDesign:PackIcon Kind="CurrencyUsd" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="73,105,0,0"/>
-                                    <TextBox Name="VIP_value_account"
-                                        Foreground="{DynamicResource ForeGroundColor}"
-                                        materialDesign:HintAssist.Hint="Monthly subscription fee"
-                                        materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
-                                        materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        VerticalAlignment="Top"
-                                    BorderBrush="{DynamicResource ForeGroundColor}" Margin="100,93,86,0"/>
+                                <Image Source="../Images/4406340.jpg" Grid.Column="1" Stretch="Fill" Margin="0,0,-11,0" Grid.RowSpan="3" />
 
-                                    <!--Apply-->
-                                    <Button Margin="128,232,128,119" Click="Account_apply_vip_value"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                         materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
-                                    Content="Apply" Height="35" Width="256" />
+                                <WrapPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                    <materialDesign:PackIcon Width="40" Height="40" Kind="CurrencyUsd"  Foreground="{DynamicResource ForeGroundColor}"/>
+                                    <TextBox Name="VIP_value_account" VerticalAlignment="Center" Width="300"
+                                    Foreground="{DynamicResource ForeGroundColor}"
+                                    materialDesign:HintAssist.Hint="Monthly subscription fee"
+                                    materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
+                                    materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    BorderBrush="{DynamicResource ForeGroundColor}"/>
+                                </WrapPanel>
 
+                                <!--Apply-->
+                                <Button Grid.Row="2" Click="Account_apply_vip_value"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
+                                            Content="Apply" Height="35" Width="256" />
 
-                                </Grid>
                             </Grid>
                         </TabItem>
                         <TabItem
                                 Header="Customer info">
-                            <DataGrid Name="customerDataGrid" >
-                                
-                            </DataGrid>
+                            <StackPanel>
+                                <WrapPanel DockPanel.Dock="Top">
+                                    <Button Click="Search_Button_Click" Background="Transparent" Foreground="{DynamicResource ForeGroundColor}" BorderThickness="0" Style="{StaticResource MaterialDesignToolButton}">
+                                        <materialDesign:PackIcon Kind="Search" Opacity="0.5"/>
+                                    </Button>
+                                    <TextBox Name="EmailSearchBox" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}" materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}" Width="100" materialDesign:HintAssist.Hint="Email" Margin="10"/>
+                                    <TextBox Name="FirstNameSearchBox" materialDesign:TextFieldAssist.UnderlineBrush="{DynamicResource ForeGroundColor}" materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}" Width="100" materialDesign:HintAssist.Hint="FirstName" Margin="10"/>
+                                </WrapPanel>
+                                <DataGrid IsReadOnly="True" Name="customerDataGrid" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="FirstName" Binding="{Binding name}" />
+                                        <DataGridTextColumn Header="LastName" Binding="{Binding familyName}" />
+                                        <DataGridTextColumn Header="Email" Binding="{Binding email}" />
+                                        <DataGridTextColumn Header="PhoneNumber" Binding="{Binding phoneNumber}" />
+                                        <DataGridTextColumn Header="Balance" Binding="{Binding balance}" />
+                                        <DataGridTextColumn Header="Total Sell" Binding="{Binding totalSell}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+
                         </TabItem>
                     </TabControl>
                 </materialDesign:Card>
@@ -95,7 +121,7 @@
                         Kind="BookOpenBlankVariant" />
                         <TextBlock
                             HorizontalAlignment="Center"
-                        Text="Books" /> 
+                        Text="Books" />
                     </StackPanel>
                 </TabItem.Header>
 
@@ -144,7 +170,7 @@
                                   Height="140"
                                   Width="196"
                                   Stretch="UniformToFill" />
-                            
+
 
                             <StackPanel
                                  Grid.Row="1"
@@ -179,7 +205,7 @@
 
                         </Grid>
                     </materialDesign:Card>
-                        <materialDesign:Card Grid.Column="2" Grid.Row="1" Background="AliceBlue" Width="200" Height="350" >
+                    <materialDesign:Card Grid.Column="2" Grid.Row="1" Background="AliceBlue" Width="200" Height="350" >
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition
@@ -207,7 +233,7 @@
                                 <TextBlock
                                     TextWrapping="Wrap"
                                     VerticalAlignment="Center"
-                                    Text="Detail of Book any thing admin type" />   
+                                    Text="Detail of Book any thing admin type" />
 
                             </StackPanel>
                             <!--info-->
@@ -358,7 +384,7 @@
                             Height="24"
                             HorizontalAlignment="Center"
             
-                        Kind="PackageVariantClosedPlus" />  
+                        Kind="PackageVariantClosedPlus" />
                         <TextBlock
                             HorizontalAlignment="Center"
                         Text="Add" />
@@ -366,57 +392,56 @@
                 </TabItem.Header>
                 <Grid Background="#dbdbdb">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width=".6*"/>
+                        <ColumnDefinition Width=".6*"/>
+                        <ColumnDefinition Width=".6*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.3*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="VIP" Margin="419,0,-156,20" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="20"/>
-                    <ToggleButton Background="#067e99" Name="add_vipvalue"
+                    <WrapPanel Margin="5" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <TextBlock Text="VIP" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="20"/>
+                        <ToggleButton Background="#067e99" Name="add_vipvalue"
                           Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
                           ToolTip="MaterialDesignSwitchAccentToggleButton"
-                          IsChecked="True" Grid.ColumnSpan="2" Margin="186,-24,46,0" Checked="add_vipvalue_Checked" Unchecked="add_vipvalue_Unchecked" />
+                          IsChecked="True" Grid.ColumnSpan="2" Checked="add_vipvalue_Checked" Unchecked="add_vipvalue_Unchecked" />
+                    </WrapPanel>
 
-                    <Button Margin="394,257,51,37" Background="#067e99" Click="add_creat_book"
+
+                    <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Background="#067e99" Click="add_creat_book"
                         Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  
                         ToolTip="MaterialDesignFloatingActionMiniButton"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="1">
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                         <materialDesign:PackIcon
                         Kind="plus"
                         Height="20"
                          Width="20" VerticalAlignment="Center" />
                     </Button>
                     <!--errors-->
-                    <TextBlock Name="add_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,40,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Name="add_errors" Text="No Errors !" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="15"></TextBlock>
                     <!--images-->
-                    <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="478,-1,-5,0" Grid.RowSpan="2"/>
+                    <Image Source="../Images/4406340.jpg" Grid.RowSpan="3" Grid.Column="3" Stretch="Fill" />
                     <Image Grid.Row="0" Source="../Images/ShopLogo.png" HorizontalAlignment="Left"/>
-                    
-                    <Border Margin="0,100,0,0" HorizontalAlignment="Left" Grid.RowSpan="2" Width="325">
 
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,83" Grid.RowSpan="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="7*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!--مشخصات کاربر-->
-                                <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Name="add_name"
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Left" Width="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <!--مشخصات کاربر-->
+                        <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Name="add_name"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Name"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -424,9 +449,9 @@
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
-                                
-                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Name="add_writer"
+
+                        <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Name="add_writer"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Writer"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -435,8 +460,8 @@
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
 
-                                <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" Name="add_printyear"
+                        <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Name="add_printyear"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Print year"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -445,8 +470,8 @@
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
 
-                                <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" Name="add_cost"
+                        <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Name="add_cost"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Cost"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -455,8 +480,8 @@
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
 
-                                <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="4" Grid.Column="1" Name="add_detail"
+                        <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" Name="add_detail"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Detail"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -465,8 +490,8 @@
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}" />
 
-                                <materialDesign:PackIcon Grid.Row="5" Grid.Column="0" Kind="Barcode" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Name="add_procode"
+                        <materialDesign:PackIcon Grid.Row="5" Grid.Column="0" Kind="Barcode" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                        <TextBox Grid.Row="5" Grid.Column="1" Name="add_procode"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="product code"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -474,31 +499,20 @@
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
+                    </Grid>
+                    <Button  VerticalAlignment="Center" Click="add_browse" HorizontalAlignment="Center"
+                             Grid.Row="2" Grid.Column="0"    
+                             Style="{StaticResource MaterialDesignRaisedButton}"
+                             materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
+                             Content="Browse file" />
 
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!--دکمه بارگذاری فایل-->
-                                <Button Margin="14,99,193,0" VerticalAlignment="Top" Click="add_browse"
-                                      Style="{StaticResource MaterialDesignRaisedButton}"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
-                                      Content="browse file" />
-                                
-                                <Button Margin="162,99,45,0" VerticalAlignment="Top" Name="add_imagebrowse" Click="add_imagebrowse_Click"
-                                      Style="{StaticResource MaterialDesignRaisedButton}"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
-                                      Content="browse image" />
-
-
-                            </Grid>
-                        </Grid>
-                    </Border>
+                    <Button  VerticalAlignment="Center" Name="add_imagebrowse" Click="add_imagebrowse_Click"
+                             HorizontalAlignment="Center"
+                             Grid.Row="2"
+                             Grid.Column="1"
+                             Style="{StaticResource MaterialDesignRaisedButton}"
+                             materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
+                             Content="Browse Image" />
                 </Grid>
             </TabItem>
             <TabItem>
@@ -511,75 +525,61 @@
                             Width="24"
                             Height="24"
                             HorizontalAlignment="Center"
-                            Kind="BookEdit" />      
+                            Kind="BookEdit" />
 
                         <TextBlock
                             HorizontalAlignment="Center"
                             Text="Edit" />
-                        
+
                     </StackPanel>
                 </TabItem.Header>
 
                 <Grid Background="#dbdbdb">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0.3*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
 
                     <!--Buttons-->
                     <!--search-->
-                    <Button Margin="337,17,108,277" Background="#067e99" Name="edit_search" Click="edit_search_Click"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniButton}"  
-                          ToolTip="MaterialDesignFloatingActionMiniButton"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Grid.Row="1">
-                        <materialDesign:PackIcon
-                        Kind="TextSearchVariant"
-                        Height="20"
-                        Width="20" VerticalAlignment="Center" />
-                        
-                    </Button>
-
                     <!--errors-->
                     <!--error-->
-                    <TextBlock Name="edit_errors" Text="No Errors !" HorizontalAlignment="Center" Margin="0,40,0,294" Grid.RowSpan="2" Foreground="DarkGreen" FontSize="15"></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" Name="edit_errors" Text="No Errors !" HorizontalAlignment="Center" Foreground="DarkGreen" FontSize="15"></TextBlock>
                     <!--VIP-->
-                    <TextBlock Text="VIP" Margin="419,0,-156,20" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="20"/>
-                    <ToggleButton Background="#067e99" Name="edit_viptoggle" Checked="edit_viptoggle_Checked" Unchecked="edit_viptoggle_Unchecked"     
+                    <WrapPanel Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right">
+                        <TextBlock Text="VIP" FontWeight="Bold" FontSize="20"/>
+                        <ToggleButton Background="#067e99" Name="edit_viptoggle" Checked="edit_viptoggle_Checked" Unchecked="edit_viptoggle_Unchecked"     
                           Style="{StaticResource MaterialDesignSwitchAccentToggleButton}"
-                          ToolTip="MaterialDesignSwitchAccentToggleButton"
-                          IsChecked="True" Grid.ColumnSpan="2" Margin="186,-24,46,0" />
+                          IsChecked="false" />
+                    </WrapPanel>
                     <!--images-->
-                    <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="478,-1,-5,0" Grid.RowSpan="2"/>
+                    <Image Source="../Images/4406340.jpg" Grid.Column="3" Stretch="Fill" Grid.RowSpan="3" Grid.ColumnSpan="2" Margin="121,0,-8,0"/>
                     <Image Grid.Row="0" Source="../Images/ShopLogo.png" HorizontalAlignment="Left"/>
-                    
-                    
-                    <Border Margin="0,100,0,0" HorizontalAlignment="Left" Grid.RowSpan="2" Width="325">
-
-                        <Grid>
+                    <Grid Grid.Row="1" Grid.ColumnSpan="3">
+                        <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,0,83" Grid.RowSpan="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="7*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!--مشخصات کاربر-->
-                                <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Name="edit_name"
+                            <!--مشخصات کاربر-->
+                            <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" Kind="Rename" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Name="edit_name"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Name"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -587,10 +587,10 @@
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
-                                
-                                
-                                <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" Name="edit_writer"
+
+
+                            <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" Kind="FountainPenTip" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Name="edit_writer"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Writer"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -602,8 +602,8 @@
 
 
 
-                                <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" Name="edit_printyear"
+                            <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" Kind="Publish" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" Name="edit_printyear"
                                          
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Print year"
@@ -613,8 +613,8 @@
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
 
-                                <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="4" Grid.Column="1" Name="edit_cost"
+                            <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" Kind="CurrencyUsd" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                            <TextBox Grid.Row="4" Grid.Column="1" Name="edit_cost"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Cost"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -623,8 +623,8 @@
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
 
-                                <materialDesign:PackIcon Grid.Row="5" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Name="edit_detail"
+                            <materialDesign:PackIcon Grid.Row="5" Grid.Column="0" Kind="CardAccountDetails" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                            <TextBox Grid.Row="5" Grid.Column="1" Name="edit_detail"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="Detail"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -634,8 +634,8 @@
                                       BorderBrush="{DynamicResource ForeGroundColor}" />
 
 
-                                <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Barcode" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Name="edit_procode"
+                            <materialDesign:PackIcon Grid.Row="0" Grid.Column="0" Kind="Barcode" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Name="edit_procode"
                                       Foreground="{DynamicResource ForeGroundColor}"
                                       materialDesign:HintAssist.Hint="product code"
                                       materialDesign:HintAssist.Foreground="{DynamicResource ForeGroundColor}"
@@ -643,44 +643,31 @@
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                       VerticalAlignment="Center"
                                       BorderBrush="{DynamicResource ForeGroundColor}"/>
-                                
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
 
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <!--دکمه بارگذاری فایل-->
-                                <Button Margin="14,99,208,0" VerticalAlignment="Top" Name="edit_browse" Click="edit_browse_Click"
+                        </Grid>
+                    </Grid>
+                    <Button Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"  Name="edit_browse" Click="edit_browse_Click"
                                       Style="{StaticResource MaterialDesignRaisedButton}"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
                                       Content="browse file" />
 
 
-                                <!--دکمه بارگذاری فایل-->
-                                <Button Margin="140,99,82,0" VerticalAlignment="Top" Name="edit_browseimage" Click="edit_browseimage_Click"
+                    <!--دکمه بارگذاری فایل-->
+                    <Button Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Name="edit_browseimage" Click="edit_browseimage_Click"
                                       Style="{StaticResource MaterialDesignRaisedButton}"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
                                       Content="browse image" />
-                                 <!--دکمه حذف محصول-->
-                                <Button Margin="267,99,-51,0" VerticalAlignment="Top" Name="edit_delete" Click="edit_delete_Click"
+                    <!--دکمه حذف محصول-->
+                    <Button Grid.Row="3" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Name="edit_delete" Click="edit_delete_Click"
                                       Style="{StaticResource MaterialDesignRaisedButton}"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
                                       Content="Delete Book " />
-                                
-                                <!--Apply-->
-                                <Button Margin="390,99,-133,0" VerticalAlignment="Top" Name="edit_apply" Click="edit_apply_Click"
+
+                    <!--Apply-->
+                    <Button Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Name="edit_apply" Click="edit_apply_Click"
                                       Style="{StaticResource MaterialDesignRaisedButton}"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
                                       Content="Apply" />
-
-                            </Grid>
-                        </Grid>
-                    </Border>
                 </Grid>
             </TabItem>
 
@@ -689,18 +676,18 @@
                     <StackPanel
                           Width="auto"
                           Height="auto">
-                        
+
                         <materialDesign:PackIcon
                             Width="24"
                             Height="24"
                             HorizontalAlignment="Center"
                             Kind="PercentCircleOutline" />
-                        
+
                         <TextBlock
                             HorizontalAlignment="Center"
                             Text="Discount" />
-                        
-                        
+
+
                     </StackPanel>
                 </TabItem.Header>
                 <Grid Background="#dbdbdb">
@@ -721,8 +708,8 @@
                     <!--images-->
                     <Image Source="../Images/4406340.jpg" Grid.ColumnSpan="2" Margin="478,-1,-5,0" Grid.RowSpan="2"/>
                     <Image Grid.Row="0" Source="../Images/ShopLogo.png" HorizontalAlignment="Left" Margin="170,-31,0,326" Grid.RowSpan="2" Width="164"/>
-                    
-                    
+
+
                     <Border Margin="0,100,0,0" HorizontalAlignment="Left" Grid.RowSpan="2" Width="325">
 
                         <Grid>
@@ -750,8 +737,8 @@
                                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                       VerticalAlignment="Top"
                                       BorderBrush="{DynamicResource ForeGroundColor}" Margin="66,16,-66,0"/>
-                                
-                                
+
+
                                 <materialDesign:PackIcon Grid.Row="1" Kind="FountainPenTip" Height="25" Width="25" Foreground="{DynamicResource ForeGroundColor}" Margin="29,53,0,0" Grid.Column="1"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Name="dis_value"
                                       Foreground="{DynamicResource ForeGroundColor}"
@@ -774,14 +761,14 @@
                                 <Button Margin="187,95,20,0" VerticalAlignment="Top" Name="dis_apply" Click="dis_apply_Click"
                                       Style="{StaticResource MaterialDesignRaisedButton}"
                                       materialDesign:ShadowAssist.ShadowDepth="Depth2" Background="#067e99" 
-                                      Content="Apply" />                
+                                      Content="Apply" />
 
                                 <!--search-->
                                 <Button HorizontalAlignment="Left" Background="#067e99" Name="dis_serach" Click="dis_serach_Click"
                                         Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                         materialDesign:ShadowAssist.ShadowAnimationDuration="0:0:1" Margin="207,-101,0,236">
-                                                                        Search
-                                    
+                                    Search
+
                                 </Button>
                                 <ComboBox Name="dis_time" 
                                       Style="{StaticResource MaterialDesignFilledComboBox}"
@@ -806,5 +793,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-    </materialDesign:Card>
+    </StackPanel>
 </Window>

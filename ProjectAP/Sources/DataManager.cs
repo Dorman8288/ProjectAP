@@ -85,6 +85,25 @@ namespace ProjectAP.Sources
                 sql = sb.ToString();
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                sb.Clear();
+
+                sb.Append("USE ProjectAP; ");
+                sb.Append("IF NOT EXISTS");
+                sb.Append("(");
+                sb.Append("SELECT * FROM sysobjects WHERE name='Admins' AND xtype='U'");
+                sb.Append(")");
+                sb.Append("CREATE TABLE Admins(");
+                sb.Append(" Email NVARCHAR(32) NOT NULL PRIMARY KEY, ");
+                sb.Append(" FirstName NVARCHAR(32), ");
+                sb.Append(" LastName NVARCHAR(32), ");
+                sb.Append(" PhoneNumber NVARCHAR(11), ");
+                sb.Append(" Password NVARCHAR(32), ");
+                sb.Append(" TotalCash FLOAT, ");
+                sb.Append(" VipAmount FLOAT, ");
+                sb.Append("); ");
+                sql = sb.ToString();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
             }
             catch(SqlException e){
                 MessageBox.Show(e.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -98,13 +117,14 @@ namespace ProjectAP.Sources
                 SaveCustomers();
                 SaveProducts();
                 SaveRelations();
+                SaveAdmins();
                 connection.Close();
-            }
+        }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+}
         public static void SaveRelations()
         {
             StringBuilder sb = new StringBuilder();
@@ -151,6 +171,30 @@ namespace ProjectAP.Sources
                 }
             }
         }
+        public static void SaveAdmins()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("INSERT Admins (Email, FirstName, LastName, PhoneNumber, Password, TotalCash, VipAmount) ");
+            sb.Append("VALUES (@email, @firstName, @lastName, @phoneNumber, @password, @totalCash, @vipAmount);");
+            sql = sb.ToString();
+            command = new SqlCommand(sql, connection);
+            foreach (var account in allAccounts)
+            {
+                if (account is Admin)
+                {
+                    Admin customer = account as Admin;
+                    command.Parameters.AddWithValue("@email", customer.email);
+                    command.Parameters.AddWithValue("@firstName", customer.name);
+                    command.Parameters.AddWithValue("@lastName", customer.familyName);
+                    command.Parameters.AddWithValue("@phoneNumber", customer.phoneNumber);
+                    command.Parameters.AddWithValue("@password", customer.password);
+                    command.Parameters.AddWithValue("@totalCash", Admin.totalCash);                    
+                    command.Parameters.AddWithValue("@vipAmount", Admin.VipAmount);     
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+                }
+            }
+        }
         public static void SaveProducts()
         {
             StringBuilder sb = new StringBuilder();
@@ -182,6 +226,7 @@ namespace ProjectAP.Sources
             LoadCustomers();
             LoadProducts();
             LoadRelations();
+            LoadAdmins();
             connection.Close();
         }
         public static void LoadCustomers()
@@ -198,6 +243,25 @@ namespace ProjectAP.Sources
                         AddAccount(newCustomer);
                         newCustomer.balance = reader.GetDouble(5);
                         newCustomer.totalSell = reader.GetDouble(6);
+                    }
+                }
+            }
+            connection.Close();
+        }
+        public static void LoadAdmins()
+        {
+            sql = "USE ProjectAP; SELECT Email, FirstName, LastName, PhoneNumber, Password, TotalCash, VipAmount FROM Admins;";
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Admin newCustomer = new Admin(reader.GetString(1), reader.GetString(2), reader.GetString(0), reader.GetString(3), reader.GetString(4));
+                        AddAccount(newCustomer);
+                        Admin.VipAmount = reader.GetDouble(6);
+                        Admin.totalCash = reader.GetDouble(5);
                     }
                 }
             }
@@ -278,6 +342,10 @@ namespace ProjectAP.Sources
         public static List<Product> getAllVIPProducts()
         {
             return Vip;
+        }
+        public static List<Customer> GetAllCustomers()
+        {
+            return allAccounts.Where(x => x is Customer).Select(x => x as Customer).ToList();
         }
     }
 }

@@ -21,13 +21,8 @@ namespace ProjectAP
     {
         public AuthorizationWindow()
         {
-            DataManager.Load();
-            DataManager.AddAccount(new Admin("Admin", "Admin", "Admin@gmail.com", "09385017532", "Admin1234"));
+            InitializeComponent();
         }
 
-        private void Authorization_Window_Closed(object sender, EventArgs e)
-        {
-            DataManager.Save();
-        }
     }
 }
