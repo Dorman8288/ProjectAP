@@ -57,6 +57,7 @@ namespace ProjectAP.Sources
                 sb.Append(" Name NVARCHAR(32), ");
                 sb.Append(" Description NTEXT, ");
                 sb.Append(" Author NVARCHAR(32), ");
+                sb.Append(" Price FLOAT, ");
                 sb.Append(" Rating INT, ");
                 sb.Append(" NumberOfRating INT, ");
                 sb.Append(" IsVip BIT, ");
@@ -95,16 +96,17 @@ namespace ProjectAP.Sources
                 SaveCustomers();
                 SaveProducts();
                 SaveRelations();
+                connection.Close();
             }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        public static void SaveCustomers()
+        public static void SaveRelations()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT Customers (Email, Inventory, Cart, Bookmark) ");
+            sb.Append("INSERT Container (Email, Inventory, Cart, Bookmarks) ");
             sb.Append("VALUES (@email, @inventory, @cart, @bookmark);");
             sql = sb.ToString();
             command = new SqlCommand(sql, connection);
@@ -114,15 +116,15 @@ namespace ProjectAP.Sources
                 {
                     Customer customer = account as Customer;
                     command.Parameters.AddWithValue("@email", customer.email);
-                    command.Parameters.AddWithValue("@inventory", customer.name);
-                    command.Parameters.AddWithValue("@cart", customer.familyName);
-                    command.Parameters.AddWithValue("@bookmark", customer.phoneNumber);
+                    command.Parameters.AddWithValue("@inventory", customer.InventoryToString());
+                    command.Parameters.AddWithValue("@cart", customer.CartToString());
+                    command.Parameters.AddWithValue("@bookmark", customer.BookmarkToString());
                     command.ExecuteNonQuery();
                     command.Parameters.Clear();
                 }
             }
         }
-        public static void SaveRelations()
+        public static void SaveCustomers()
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("INSERT Customers (Email, FirstName, LastName, PhoneNumber, Password, Balance, TotalSell, VipExpiringDate) ");
@@ -150,8 +152,8 @@ namespace ProjectAP.Sources
         public static void SaveProducts()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT Products (ID, Name, Description, Author, Rating, NumberOfRating, IsVip, ImagePath, FilePath) ");
-            sb.Append("VALUES (@ID, @name, @description, @author, @rating, @numberOfRating, @isVip, @imagePath, @filePath);");
+            sb.Append("INSERT Products (ID, Name, Description, Author, Price, Rating, NumberOfRating, IsVip, ImagePath, FilePath) ");
+            sb.Append("VALUES (@ID, @name, @description, @author, @price, @rating, @numberOfRating, @isVip, @imagePath, @filePath);");
             sql = sb.ToString();
             command = new SqlCommand(sql, connection);
             foreach (var product in allProducts)
@@ -160,6 +162,7 @@ namespace ProjectAP.Sources
                 command.Parameters.AddWithValue("@name", product.name);
                 command.Parameters.AddWithValue("@description", product.description);
                 command.Parameters.AddWithValue("@author", product.author);
+                command.Parameters.AddWithValue("@price", product.price);
                 command.Parameters.AddWithValue("@rating", product.rating);
                 command.Parameters.AddWithValue("@numberOfRating", product.numOfRatings);
                 command.Parameters.AddWithValue("@isVip", product.isVip);
@@ -169,6 +172,50 @@ namespace ProjectAP.Sources
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
             }
+        }
+        public static void Load()
+        {
+            LoadCustomers();
+            LoadProducts();
+            //LoadRelations();
+            connection.Close();
+        }
+        public static void LoadCustomers()
+        {
+            sql = "USE ProjectAP; SELECT Email, FirstName, LastName, PhoneNumber, Password, Balance, TotalSell, VipExpiringDate FROM Customers;";
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Customer newCustomer = new Customer(reader.GetString(1), reader.GetString(2), reader.GetString(0), reader.GetString(3), reader.GetString(4), DateTime.Parse(reader.GetString(7)));
+                        AddAccount(newCustomer);
+                        newCustomer.balance = reader.GetDouble(5);
+                        newCustomer.totalSell = reader.GetDouble(6);
+                    }
+                }
+            }
+            connection.Close();
+        }
+        public static void LoadProducts()
+        {
+            sql = "USE ProjectAP; SELECT ID, Name, Description, Author, Price, Rating, NumberOfRating, IsVip, ImagePath, FilePath FROM Products;";
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Product newProduct = new Product(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(4), reader.GetString(2), reader.GetString(9), reader.GetInt32(5), reader.GetString(3), reader.GetString(8), reader.GetBoolean(7));
+                        AddProduct(newProduct);
+                        newProduct.numOfRatings = reader.GetInt32(6);
+                    }
+                }
+            }
+            connection.Close();
         }
         public static Account getAccount(string email)
         {
