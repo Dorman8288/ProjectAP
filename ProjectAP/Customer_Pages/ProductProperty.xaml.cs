@@ -81,6 +81,7 @@ namespace ProjectAP.Customer_Pages
             if (dialog.transactionResult)
             {
                 ActiveAccount.inventory.Add(DataContext as Product);
+                (DataContext as Product).totalSell += (DataContext as Product).CalculatePrice();
             }
         }
 

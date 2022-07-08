@@ -34,7 +34,7 @@ namespace ProjectAP.Customer_Pages
 
         private void VIP_Buy_Button_Click(object sender, RoutedEventArgs e)
         {
-            transaction_Dialog dialog = new transaction_Dialog(1000 ,ActiveAccount);
+            transaction_Dialog dialog = new transaction_Dialog(Admin.VipAmount ,ActiveAccount);
             dialog.ShowDialog();
             if (dialog.transactionResult)
             {

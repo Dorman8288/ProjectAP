@@ -21,12 +21,8 @@ namespace ProjectAP
     {
         public AuthorizationWindow()
         {
-            DataManager.Load();
+            InitializeComponent();
         }
 
-        private void Authorization_Window_Closed(object sender, EventArgs e)
-        {
-            DataManager.Save();
-        }
     }
 }

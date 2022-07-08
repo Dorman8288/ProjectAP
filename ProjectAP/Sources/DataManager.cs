@@ -58,11 +58,13 @@ namespace ProjectAP.Sources
                 sb.Append(" Description NTEXT, ");
                 sb.Append(" Author NVARCHAR(32), ");
                 sb.Append(" Price FLOAT, ");
+                sb.Append(" TotalSell FLOAT, ");
                 sb.Append(" Rating INT, ");
                 sb.Append(" NumberOfRating INT, ");
                 sb.Append(" IsVip BIT, ");
                 sb.Append(" ImagePath NTEXT, ");
                 sb.Append(" FilePath NTEXT, ");
+                sb.Append(" Discount FLOAT, ");
                 sb.Append("); ");
                 sql = sb.ToString();
                 command = new SqlCommand(sql, connection);
@@ -83,6 +85,25 @@ namespace ProjectAP.Sources
                 sql = sb.ToString();
                 command = new SqlCommand(sql, connection);
                 command.ExecuteNonQuery();
+                sb.Clear();
+
+                sb.Append("USE ProjectAP; ");
+                sb.Append("IF NOT EXISTS");
+                sb.Append("(");
+                sb.Append("SELECT * FROM sysobjects WHERE name='Admins' AND xtype='U'");
+                sb.Append(")");
+                sb.Append("CREATE TABLE Admins(");
+                sb.Append(" Email NVARCHAR(32) NOT NULL PRIMARY KEY, ");
+                sb.Append(" FirstName NVARCHAR(32), ");
+                sb.Append(" LastName NVARCHAR(32), ");
+                sb.Append(" PhoneNumber NVARCHAR(11), ");
+                sb.Append(" Password NVARCHAR(32), ");
+                sb.Append(" TotalCash FLOAT, ");
+                sb.Append(" VipAmount FLOAT, ");
+                sb.Append("); ");
+                sql = sb.ToString();
+                command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
             }
             catch(SqlException e){
                 MessageBox.Show(e.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -96,13 +117,14 @@ namespace ProjectAP.Sources
                 SaveCustomers();
                 SaveProducts();
                 SaveRelations();
+                SaveAdmins();
                 connection.Close();
-            }
+        }
             catch (SqlException e)
             {
                 MessageBox.Show(e.Message, "error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+}
         public static void SaveRelations()
         {
             StringBuilder sb = new StringBuilder();
@@ -149,11 +171,35 @@ namespace ProjectAP.Sources
                 }
             }
         }
+        public static void SaveAdmins()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("INSERT Admins (Email, FirstName, LastName, PhoneNumber, Password, TotalCash, VipAmount) ");
+            sb.Append("VALUES (@email, @firstName, @lastName, @phoneNumber, @password, @totalCash, @vipAmount);");
+            sql = sb.ToString();
+            command = new SqlCommand(sql, connection);
+            foreach (var account in allAccounts)
+            {
+                if (account is Admin)
+                {
+                    Admin customer = account as Admin;
+                    command.Parameters.AddWithValue("@email", customer.email);
+                    command.Parameters.AddWithValue("@firstName", customer.name);
+                    command.Parameters.AddWithValue("@lastName", customer.familyName);
+                    command.Parameters.AddWithValue("@phoneNumber", customer.phoneNumber);
+                    command.Parameters.AddWithValue("@password", customer.password);
+                    command.Parameters.AddWithValue("@totalCash", Admin.totalCash);                    
+                    command.Parameters.AddWithValue("@vipAmount", Admin.VipAmount);     
+                    command.ExecuteNonQuery();
+                    command.Parameters.Clear();
+                }
+            }
+        }
         public static void SaveProducts()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT Products (ID, Name, Description, Author, Price, Rating, NumberOfRating, IsVip, ImagePath, FilePath) ");
-            sb.Append("VALUES (@ID, @name, @description, @author, @price, @rating, @numberOfRating, @isVip, @imagePath, @filePath);");
+            sb.Append("INSERT Products (ID, Name, Description, Author, Price, TotalSell, Rating, NumberOfRating, IsVip, ImagePath, FilePath, Discount) ");
+            sb.Append("VALUES (@ID, @name, @description, @author, @price, @totalSell, @rating, @numberOfRating, @isVip, @imagePath, @filePath, @discount);");
             sql = sb.ToString();
             command = new SqlCommand(sql, connection);
             foreach (var product in allProducts)
@@ -163,11 +209,13 @@ namespace ProjectAP.Sources
                 command.Parameters.AddWithValue("@description", product.description);
                 command.Parameters.AddWithValue("@author", product.author);
                 command.Parameters.AddWithValue("@price", product.price);
+                command.Parameters.AddWithValue("@totalSell", product.totalSell);
                 command.Parameters.AddWithValue("@rating", product.rating);
                 command.Parameters.AddWithValue("@numberOfRating", product.numOfRatings);
                 command.Parameters.AddWithValue("@isVip", product.isVip);
                 command.Parameters.AddWithValue("@imagePath", product.imagePath);
                 command.Parameters.AddWithValue("@filePath", product.filePath);
+                command.Parameters.AddWithValue("@discount", product.discount);
                 
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
@@ -178,6 +226,7 @@ namespace ProjectAP.Sources
             LoadCustomers();
             LoadProducts();
             LoadRelations();
+            LoadAdmins();
             connection.Close();
         }
         public static void LoadCustomers()
@@ -199,9 +248,9 @@ namespace ProjectAP.Sources
             }
             connection.Close();
         }
-        public static void LoadProducts()
+        public static void LoadAdmins()
         {
-            sql = "USE ProjectAP; SELECT ID, Name, Description, Author, Price, Rating, NumberOfRating, IsVip, ImagePath, FilePath FROM Products;";
+            sql = "USE ProjectAP; SELECT Email, FirstName, LastName, PhoneNumber, Password, TotalCash, VipAmount FROM Admins;";
             connection.Open();
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
@@ -209,9 +258,30 @@ namespace ProjectAP.Sources
                 {
                     while (reader.Read())
                     {
-                        Product newProduct = new Product(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(4), reader.GetString(2), reader.GetString(9), reader.GetInt32(5), reader.GetString(3), reader.GetString(8), reader.GetBoolean(7));
+                        Admin newCustomer = new Admin(reader.GetString(1), reader.GetString(2), reader.GetString(0), reader.GetString(3), reader.GetString(4));
+                        AddAccount(newCustomer);
+                        Admin.VipAmount = reader.GetDouble(6);
+                        Admin.totalCash = reader.GetDouble(5);
+                    }
+                }
+            }
+            connection.Close();
+        }
+        public static void LoadProducts()
+        {
+            sql = "USE ProjectAP; SELECT ID, Name, Description, Author, Price, TotalSell, Rating, NumberOfRating, IsVip, ImagePath, FilePath, Discount FROM Products;";
+            connection.Open();
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Product newProduct = new Product(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(4), reader.GetString(2), reader.GetString(10), reader.GetInt32(6), reader.GetString(3), reader.GetString(9), reader.GetBoolean(8));
                         AddProduct(newProduct);
-                        newProduct.numOfRatings = reader.GetInt32(6);
+                        newProduct.totalSell = reader.GetDouble(5);
+                        newProduct.numOfRatings = reader.GetInt32(7);
+                        newProduct.discount = reader.GetDouble(11);
                     }
                 }
             }
@@ -272,6 +342,10 @@ namespace ProjectAP.Sources
         public static List<Product> getAllVIPProducts()
         {
             return Vip;
+        }
+        public static List<Customer> GetAllCustomers()
+        {
+            return allAccounts.Where(x => x is Customer).Select(x => x as Customer).ToList();
         }
     }
 }

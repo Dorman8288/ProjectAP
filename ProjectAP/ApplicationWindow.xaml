@@ -8,8 +8,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="ApplicationWindow" Height="450" Width="830"
         WindowStartupLocation="CenterScreen"
-        Icon="Images/Logo.ico"
-        Closed="Window_Closed">
+        Icon="Images/favicon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

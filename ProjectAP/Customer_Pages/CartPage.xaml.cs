@@ -47,6 +47,7 @@ namespace ProjectAP.Customer_Pages
             if (dialog.transactionResult)
             {
                 List<Product> newList = CartDisplayer.ItemsSource.Cast<Product>().ToList();
+                newList.ForEach(x => x.totalSell += x.CalculatePrice());
                 ActiveAccount.inventory.AddRange(newList);
                 ActiveAccount.cart.Reset();
                 CartDisplayer.ItemsSource = ActiveAccount.cart.allProducts;
