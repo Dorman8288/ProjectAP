@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:ProjectAP.admin_section_develop"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
-        Title="admin" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen">
+        Title="Admin" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Icon="../Images/favicon.ico">
     <materialDesign:Card>
         <TabControl
     VerticalContentAlignment="Top"
@@ -74,10 +75,10 @@
                             </Grid>
                         </TabItem>
                         <TabItem
-      Header="Customer info">
-                            <TextBlock
-        Margin="8"
-        Text="SecondaryDark Tab 2" />
+                                Header="Customer info">
+                            <DataGrid Name="customerDataGrid" >
+                                
+                            </DataGrid>
                         </TabItem>
                     </TabControl>
                 </materialDesign:Card>

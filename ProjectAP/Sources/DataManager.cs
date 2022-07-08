@@ -58,11 +58,13 @@ namespace ProjectAP.Sources
                 sb.Append(" Description NTEXT, ");
                 sb.Append(" Author NVARCHAR(32), ");
                 sb.Append(" Price FLOAT, ");
+                sb.Append(" TotalSell FLOAT, ");
                 sb.Append(" Rating INT, ");
                 sb.Append(" NumberOfRating INT, ");
                 sb.Append(" IsVip BIT, ");
                 sb.Append(" ImagePath NTEXT, ");
                 sb.Append(" FilePath NTEXT, ");
+                sb.Append(" Discount FLOAT, ");
                 sb.Append("); ");
                 sql = sb.ToString();
                 command = new SqlCommand(sql, connection);
@@ -152,8 +154,8 @@ namespace ProjectAP.Sources
         public static void SaveProducts()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("INSERT Products (ID, Name, Description, Author, Price, Rating, NumberOfRating, IsVip, ImagePath, FilePath) ");
-            sb.Append("VALUES (@ID, @name, @description, @author, @price, @rating, @numberOfRating, @isVip, @imagePath, @filePath);");
+            sb.Append("INSERT Products (ID, Name, Description, Author, Price, TotalSell, Rating, NumberOfRating, IsVip, ImagePath, FilePath, Discount) ");
+            sb.Append("VALUES (@ID, @name, @description, @author, @price, @totalSell, @rating, @numberOfRating, @isVip, @imagePath, @filePath, @discount);");
             sql = sb.ToString();
             command = new SqlCommand(sql, connection);
             foreach (var product in allProducts)
@@ -163,11 +165,13 @@ namespace ProjectAP.Sources
                 command.Parameters.AddWithValue("@description", product.description);
                 command.Parameters.AddWithValue("@author", product.author);
                 command.Parameters.AddWithValue("@price", product.price);
+                command.Parameters.AddWithValue("@totalSell", product.totalSell);
                 command.Parameters.AddWithValue("@rating", product.rating);
                 command.Parameters.AddWithValue("@numberOfRating", product.numOfRatings);
                 command.Parameters.AddWithValue("@isVip", product.isVip);
                 command.Parameters.AddWithValue("@imagePath", product.imagePath);
                 command.Parameters.AddWithValue("@filePath", product.filePath);
+                command.Parameters.AddWithValue("@discount", product.discount);
                 
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
@@ -201,7 +205,7 @@ namespace ProjectAP.Sources
         }
         public static void LoadProducts()
         {
-            sql = "USE ProjectAP; SELECT ID, Name, Description, Author, Price, Rating, NumberOfRating, IsVip, ImagePath, FilePath FROM Products;";
+            sql = "USE ProjectAP; SELECT ID, Name, Description, Author, Price, TotalSell, Rating, NumberOfRating, IsVip, ImagePath, FilePath, Discount FROM Products;";
             connection.Open();
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
@@ -209,9 +213,11 @@ namespace ProjectAP.Sources
                 {
                     while (reader.Read())
                     {
-                        Product newProduct = new Product(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(4), reader.GetString(2), reader.GetString(9), reader.GetInt32(5), reader.GetString(3), reader.GetString(8), reader.GetBoolean(7));
+                        Product newProduct = new Product(reader.GetString(1), reader.GetInt32(0), reader.GetDouble(4), reader.GetString(2), reader.GetString(10), reader.GetInt32(6), reader.GetString(3), reader.GetString(9), reader.GetBoolean(8));
                         AddProduct(newProduct);
-                        newProduct.numOfRatings = reader.GetInt32(6);
+                        newProduct.totalSell = reader.GetDouble(5);
+                        newProduct.numOfRatings = reader.GetInt32(7);
+                        newProduct.discount = reader.GetDouble(11);
                     }
                 }
             }

@@ -14,7 +14,8 @@ namespace ProjectAP.Sources
         double _price;
         string _description;
         public string filePath { get; }
-        double _discount;
+        double _discount = 0;
+        double _totalSell;
         string _author;
         public string imagePath { get; }
         public bool isVip { get; } = false;
@@ -26,7 +27,7 @@ namespace ProjectAP.Sources
         public double discount
         {
             get { return _discount; }
-            private set
+            set
             {
                 if (!(0 < value && value <= 1)) throw new Exception("discount amount is invalid");
                 else
@@ -49,6 +50,11 @@ namespace ProjectAP.Sources
         {
             get { return _price; }
             private set { if (value < 0) throw new Exception("Price should be Positive"); else _price = value; }
+        }
+        public double totalSell
+        {
+            get { return _totalSell; }
+            set { if (value < 0) throw new Exception("Price should be Positive"); else _totalSell = value; }
         }
         public string description
         {

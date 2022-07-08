@@ -37,13 +37,13 @@ namespace ProjectAP.page
                 {
                     ApplicationWindow window = new ApplicationWindow(account as Customer);
                     window.Show();
-                    Application.Current.Windows.OfType<AuthorizationWindow>().First(x => x.Title == "AuthorizationWindow").Close();
+                    Application.Current.Windows.OfType<AuthorizationWindow>().First().Close();
                 }
                 if(account is Admin)
                 {
                     admin_main_section window = new admin_main_section(account as Admin);
                     window.Show();
-                    Application.Current.Windows.OfType<AuthorizationWindow>().First(x => x.Title == "AuthorizationWindow").Close();
+                    Application.Current.Windows.OfType<AuthorizationWindow>().First().Close();
                 }
             }
             catch(Exception error)
