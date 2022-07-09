@@ -36,7 +36,7 @@
                                         <RowDefinition Height="10*"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <Image DockPanel.Dock="Top" Grid.Row="0" Source="{Binding image}" Stretch="Fill"/>
+                                    <Image DockPanel.Dock="Top" Grid.Row="0" Source="{Binding imagePath}" Stretch="Fill"/>
                                     <TextBlock Grid.Row="1" Text="{Binding name}" HorizontalAlignment="Center"/>
                                 </Grid>
                             </Button>

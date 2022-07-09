@@ -12,7 +12,10 @@
     <None Remove="Images\images.jpg" />
     <None Remove="Images\logo.ico" />
     <None Remove="Images\ShopIcon.ico" />
+    <None Remove="Resources\1.pdf" />
     <None Remove="Resources\1.png" />
+    <None Remove="Resources\2.jpeg" />
+    <None Remove="Resources\2.pdf" />
     <None Remove="Resources\234.jpeg" />
     <None Remove="Resources\234.pdf" />
     <None Remove="Resources\2345.pdf" />
@@ -21,6 +24,8 @@
     <None Remove="Resources\23565.pdf" />
     <None Remove="Resources\24444.pdf" />
     <None Remove="Resources\24444.png" />
+    <None Remove="Resources\3.jpg" />
+    <None Remove="Resources\3.pdf" />
     <None Remove="Resources\432.jpeg" />
     <None Remove="Resources\432.pdf" />
     <None Remove="Resources\657.jpeg" />
@@ -51,9 +56,12 @@
     <Resource Include="Images\favicon.ico" />
     <Resource Include="Images\images.jpg" />
     <Resource Include="Images\ShopLogo.png" />
+    <Resource Include="Resources\1.pdf" />
     <Resource Include="Resources\1.png" />
-    <Resource Include="Resources\TestImage1.jpg" />
-    <Resource Include="Resources\TestImage2.jpg" />
+    <Resource Include="Resources\2.jpeg" />
+    <Resource Include="Resources\2.pdf" />
+    <Resource Include="Resources\3.jpg" />
+    <Resource Include="Resources\3.pdf" />
     <Resource Include="Resources\TestImage3.jpg" />
     <Resource Include="Resources\TestImage4.png" />
   </ItemGroup>

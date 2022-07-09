@@ -24,12 +24,16 @@ namespace ProjectAP.admin_section_develop
     {
         Admin ActiveAccount;
         ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
+        ObservableCollection<Product> products = new ObservableCollection<Product>();
         public admin_main_section(Admin ActiveAccount)
         {
             InitializeComponent();
             this.ActiveAccount = ActiveAccount;
             DataManager.GetAllCustomers().ForEach(x => customers.Add(x));
 ;            customerDataGrid.ItemsSource = customers;
+            DataManager.getAllProducts().ForEach(x => products.Add(x));
+            ProductDataGrid.ItemsSource = products;
+            wallet_value.Text = Admin.totalCash.ToString();
         }
 
         private void Search_Button_Click(object sender, RoutedEventArgs e)
@@ -37,7 +41,10 @@ namespace ProjectAP.admin_section_develop
             customerDataGrid.ItemsSource = customerDataGrid.ItemsSource.Cast<Customer>().Where(x => Regex.IsMatch(x.email, @"^.*" + EmailSearchBox.Text + @".*$") && Regex.IsMatch(x.name, @"^.*" + FirstNameSearchBox.Text + @".*$"));
         }
 
-
+        private void Search_Product_Button_Click(object sender, RoutedEventArgs e)
+        {
+            ProductDataGrid.ItemsSource = ProductDataGrid.ItemsSource.Cast<Product>().Where(x => Regex.IsMatch(x.name, @"^.*" + NameSearchBox.Text + @".*$") && Regex.IsMatch(x.author, @"^.*" + AuthorNameSearchBox.Text + @".*$"));
+        }
 
 
         // func
@@ -64,10 +71,6 @@ namespace ProjectAP.admin_section_develop
 
 
         //book
-        private void Book_search_book(object sender, RoutedEventArgs e)
-        {
-            string search = Book_search_nameorcode.Text;
-        }
 
         //load other info from database
 
@@ -137,7 +140,7 @@ namespace ProjectAP.admin_section_develop
         private void add_imagebrowse_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg";
+            dialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg";
             if (dialog.ShowDialog() == true)
             {
                 string extention = System.IO.Path.GetExtension(dialog.FileName);
@@ -260,59 +263,46 @@ namespace ProjectAP.admin_section_develop
 
 
         //discount
-        private void dis_serach_Click(object sender, RoutedEventArgs e)
-        {
-            string search = dis_procode.Text;
-            if(search==null)
-            {
-                dis_errors.Text = "first search";
-                dis_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
-            }
-            //search this code
-        }
 
         private void dis_apply_Click(object sender, RoutedEventArgs e)
         {
-            int time = 0;
-            string timecombo = dis_time.Text;
-            if(timecombo== "30 min")
-            {
-                time = 30;
-            }
-            if (timecombo == "1 hr")
-            {
-                time = 60;
-            }
-            if (timecombo == "2 hr")
-            {
-                time = 120;
-            }
-            if (timecombo == "4 hr")
-            {
-                time = 240;
-            }
-            if (timecombo == "12 hr")
-            {
-                time = 720;
-            }
-
-
-
-            double value=0;
             try
             {
-                value = double.Parse(dis_value.Text);
+                if (dis_procode.Text == "")
+                    throw new Exception("you should enter product code first");
+                Product product = DataManager.getAllProducts().Single(x => x.ID == int.Parse(dis_procode.Text));
+                int time = 0;
+                string timecombo = dis_time.Text;
+                if (timecombo == "30 min")
+                {
+                    time = 30;
+                }
+                if (timecombo == "1 hr")
+                {
+                    time = 60;
+                }
+                if (timecombo == "2 hr")
+                {
+                    time = 120;
+                }
+                if (timecombo == "4 hr")
+                {
+                    time = 240;
+                }
+                if (timecombo == "12 hr")
+                {
+                    time = 720;
+                }
+                double value = double.Parse(dis_value.Text);
+                product.discount = value / 100;
+                dis_errors.Text = "Successful";
+                dis_errors.Foreground = new SolidColorBrush(Colors.Green);
             }
-            catch
+            catch (Exception error)
             {
-
+                dis_errors.Text = error.Message;
+                dis_errors.Foreground = new SolidColorBrush(Colors.DarkRed);
             }
-            if(value==0)
-            {
-                dis_errors.Text = "input value";
-                dis_errors.Foreground = new System.Windows.Media.SolidColorBrush(Colors.DarkRed);
-            }
-
         }
 
 
@@ -320,20 +310,17 @@ namespace ProjectAP.admin_section_develop
         private void wallet_withdraw_accept_Click(object sender, RoutedEventArgs e)
         {
             string card = wallet_card.Text;
-            //amir
-            // regex then withdraw
-        }
-
-        private void wallet_withdraw_enable_Click(object sender, RoutedEventArgs e)
-        {
-            wallet_card.IsEnabled = true;
-        }
-
-        private void wallet_show_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("seccesful!","withdraw",MessageBoxButton.OK);
-            wallet_value.Text = "6546$";
-            // amir load this from data base
+            if (Account.CardNumberIsValid(card))
+            {
+                Admin.totalCash = 0;
+                errorTB.Text = "Successful";
+                errorTB.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                errorTB.Text = "Card Number INvalid";
+                errorTB.Foreground = new SolidColorBrush(Colors.DarkRed);
+            }
         }
 
         private void Back_Button_Click(object sender, RoutedEventArgs e)

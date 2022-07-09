@@ -61,7 +61,6 @@ namespace ProjectAP.Customer_Pages
             {
                 bookmarkToggle.IsChecked = true;
             }
-            MessageBox.Show(ActiveAccount.bookMarks.Count.ToString());
         }
 
         private void bookmarkToggle_Unchecked(object sender, RoutedEventArgs e)
@@ -82,6 +81,7 @@ namespace ProjectAP.Customer_Pages
             {
                 ActiveAccount.inventory.Add(DataContext as Product);
                 (DataContext as Product).totalSell += (DataContext as Product).CalculatePrice();
+                Admin.totalCash += (DataContext as Product).CalculatePrice();
             }
         }
 

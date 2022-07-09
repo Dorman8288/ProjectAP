@@ -29,10 +29,10 @@ namespace ProjectAP.Customer_Pages
             InitializeComponent();
             nonVipProducts = DataManager.getAllNonVipProducts();
             Displayer.ItemsSource = nonVipProducts;
+            DataContext = this;
         }
         private void Search_Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(ActiveAccount.bookMarks.Count.ToString());
             Displayer.ItemsSource = Displayer.ItemsSource.Cast<Product>().Where(x => Regex.IsMatch(x.name, @"^.*" + NameSearchBox.Text + @".*$") && Regex.IsMatch(x.author, @"^.*" + AuthorSearchBox.Text + @".*$") && ActiveAccount.bookMarks.Contains(x) == BookMarkCheckBox.IsChecked);
         }
 

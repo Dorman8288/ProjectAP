@@ -73,7 +73,7 @@ namespace ProjectAP.Sources
             else return DateTime.Now.Year <= year;
         }
         bool CardCVV2IsValid(string CVV2) => Regex.IsMatch(CVV2, @"^\d{3,4}$");
-        bool CardNumberIsValid(string cardNumber)
+        public static bool CardNumberIsValid(string cardNumber)
         {
             if (!Regex.IsMatch(cardNumber, @"^\d{16}$")) return false;
             //luhn algorithm
